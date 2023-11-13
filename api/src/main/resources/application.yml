@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  rabbitmq:
+    virtual-host: hzgwkcsm
+    host: toad.rmq.cloudamqp.com
+    port: 5672
+    username: hzgwkcsm
+    password: feMUhIx0bxqeWN67wJEzjX4w3rUNBsSz
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/test"
+    username: postgres
+    password: root
+
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+
+springdoc:
+  swagger-ui:
+    path: /
