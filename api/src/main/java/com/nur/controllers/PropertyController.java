@@ -1,7 +1,10 @@
 package com.nur.controllers;
 
 import an.awesome.pipelinr.Pipeline;
+import com.nur.command.characteristicProperty.create.CreateCharacteristicPropertyCommand;
+import com.nur.command.characteristicProperty.list.GetCharacteristicByPropertyQuery;
 import com.nur.command.property.listByUserId.GetPropertiesByUserQuery;
+import com.nur.dtos.PropertyCharacteristicDto;
 import com.nur.dtos.PropertyDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +38,11 @@ public class PropertyController {
         GetPropertiesQuery query = new GetPropertiesQuery();
         return query.execute(pipeline);
     }
-
+    @GetMapping("/characteristic/{propertyId}")
+    public List<PropertyCharacteristicDto> getCharacteristicByPropertyId(@PathVariable String propertyId) {
+        GetCharacteristicByPropertyQuery query = new GetCharacteristicByPropertyQuery(propertyId);
+        return query.execute(pipeline);
+    }
     @GetMapping("/users/{userId}")
     public List<PropertyDto> getListAllPropertyByUserId(@PathVariable String userId) {
         GetPropertiesByUserQuery query = new GetPropertiesByUserQuery(userId);
@@ -46,6 +53,14 @@ public class PropertyController {
     public PropertyDto createProperty(@RequestBody PropertyDto propertyDto) {
 
         CreatePropertyCommand command = new CreatePropertyCommand(
+                propertyDto
+        );
+        return command.execute(pipeline);
+    }
+    @PostMapping("/characteristic")
+    public PropertyCharacteristicDto createCharacteristicProperty(@RequestBody PropertyCharacteristicDto propertyDto) {
+
+        CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(
                 propertyDto
         );
         return command.execute(pipeline);

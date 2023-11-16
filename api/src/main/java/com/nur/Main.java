@@ -4,6 +4,7 @@ import an.awesome.pipelinr.Notification;
 import an.awesome.pipelinr.Pipeline;
 import an.awesome.pipelinr.Pipelinr;
 import com.nur.repositories.*;
+import com.nur.repositories.characteristicProperty.CharacteristicPropertyJpaRepository;
 import com.nur.repositories.propiedad.PropertyJpaRepository;
 import com.nur.repositories.characteristic.CharacteristicJpaRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -41,6 +42,12 @@ public class Main {
     @Bean(name = "tipoPropiedadRepository")
     public CharacteristicRepository tipoPropiedadRepository() {
         return new CharacteristicJpaRepository();
+    }
+
+    @Primary
+    @Bean(name = "characteristicPropertyRepository")
+    public CharacteristicPropertyRepository characteristicPropertyRepository() {
+        return new CharacteristicPropertyJpaRepository();
     }
 
 

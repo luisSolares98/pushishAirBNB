@@ -1,13 +1,11 @@
 package com.nur.repositories.characteristic;
 
 import com.nur.model.CharacteristicJpaModel;
-import com.nur.utils.CharacteristicPropertyUtils;
+import com.nur.utils.CharacteristicUtils;
 import com.nur.core.BusinessRuleValidationException;
 import com.nur.model.Characteristic;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.util.Streamable;
-import org.springframework.stereotype.Repository;
 import com.nur.repositories.CharacteristicRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,7 @@ public class CharacteristicJpaRepository implements CharacteristicRepository {
 
     @Override
     public UUID update(Characteristic tipo) {
-        CharacteristicJpaModel seatJpaModel = CharacteristicPropertyUtils.tipoToJpaEntity(tipo);
+        CharacteristicJpaModel seatJpaModel = CharacteristicUtils.tipoToJpaEntity(tipo);
         return crudRepository.save(seatJpaModel).getId();
     }
 
@@ -37,7 +35,7 @@ public class CharacteristicJpaRepository implements CharacteristicRepository {
                 .toList();
         List<Characteristic> tipos = new ArrayList<>();
         for (CharacteristicJpaModel jpaModel : jpaModels) {
-            tipos.add(CharacteristicPropertyUtils.jpaModelToTipoPropiedad(jpaModel));
+            tipos.add(CharacteristicUtils.jpaModelToTipoPropiedad(jpaModel));
         }
         return tipos;
     }

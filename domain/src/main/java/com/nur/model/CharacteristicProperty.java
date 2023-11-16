@@ -1,21 +1,23 @@
 package com.nur.model;
 
 import com.nur.core.AggregateRoot;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
-
+@Getter
 public class CharacteristicProperty extends AggregateRoot {
 
-    private UUID characteristicPropertyId;
+    private UUID characteristicId;
     private UUID propertyId;
 
     public CharacteristicProperty(UUID id, UUID characteristicPropertyId, UUID propertyId) {
         this.id = id;
-        this.characteristicPropertyId = characteristicPropertyId;
+        this.characteristicId = characteristicPropertyId;
         this.propertyId = propertyId;
     }
     public CharacteristicProperty(UUID characteristicPropertyId, UUID propertyId) {
-        this.characteristicPropertyId = characteristicPropertyId;
+        this.characteristicId = characteristicPropertyId;
         this.propertyId = propertyId;
     }
 }

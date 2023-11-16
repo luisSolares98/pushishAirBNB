@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import com.nur.command.characteristic.create.CreateCharacteristicCommand;
 import com.nur.command.characteristic.list.GetListCharacteristicQuery;
-
 import java.util.List;
 
 @CrossOrigin(origins = "*")
