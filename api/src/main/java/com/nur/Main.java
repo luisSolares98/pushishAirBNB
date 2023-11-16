@@ -4,12 +4,8 @@ import an.awesome.pipelinr.Notification;
 import an.awesome.pipelinr.Pipeline;
 import an.awesome.pipelinr.Pipelinr;
 import com.nur.repositories.*;
-import com.nur.repositories.propiedad.PropiedadJpaRepository;
-import com.nur.repositories.MetodoPago.MetodoPagoJpaRepository;
-import com.nur.repositories.check.in.CheckInJpaRepository;
-import com.nur.repositories.persona.PersonaJpaRepository;
-import com.nur.repositories.transaccion.TransactionJpaRepository;
-import com.nur.repositories.tipoPropiedad.TipoPropiedadJpaRepository;
+import com.nur.repositories.propiedad.PropertyJpaRepository;
+import com.nur.repositories.characteristic.CharacteristicJpaRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import java.util.Arrays;
@@ -20,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
@@ -34,35 +31,16 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean(name = "checkInRepository")
-    public CheckInRepository checkInRepository() {
-        return new CheckInJpaRepository();
-    }
-
-    @Bean(name = "passangerRepository")
-    public PersonaRepository passangerRepository() {
-        return new PersonaJpaRepository();
-    }
-
-    @Bean(name = "seatRepository")
-    public TransactionRepository seatRepository() {
-        return new TransactionJpaRepository();
-    }
-
-    @Bean(name = "metodoPagoRepository")
-    public MetodoPagoRepository metodoPagoRepository() {
-        return new MetodoPagoJpaRepository();
-    }
-
-
+    @Primary
     @Bean(name = "propiedadRepository")
-    public PropiedadRepository propiedadRepository() {
-        return new PropiedadJpaRepository();
+    public PropertyRepository propiedadRepository() {
+        return new PropertyJpaRepository();
     }
 
+    @Primary
     @Bean(name = "tipoPropiedadRepository")
-    public TipoPropiedadRepository tipoPropiedadRepository() {
-        return new TipoPropiedadJpaRepository();
+    public CharacteristicRepository tipoPropiedadRepository() {
+        return new CharacteristicJpaRepository();
     }
 
 

@@ -1,0 +1,48 @@
+package com.nur.repositories.propiedad;
+
+import com.nur.model.PropertyJpaModel;
+import com.nur.utils.PropertyUtils;
+import com.nur.core.BusinessRuleValidationException;
+import com.nur.model.Property;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
+import com.nur.repositories.PropertyRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class PropertyJpaRepository implements PropertyRepository {
+
+    @Autowired
+    private PropertyCrudRepository propertyCrudRepository;
+
+    @Override
+    public UUID update(Property propiedad) {
+        PropertyJpaModel propiedadJpaModel = PropertyUtils.propiedadToJpaEntity(propiedad);
+        return propertyCrudRepository.save(propiedadJpaModel).getId();
+    }
+
+    @Override
+    public Property findPropertyById(UUID id) throws BusinessRuleValidationException {
+
+        return PropertyUtils.jpaModelToPropiedad(propertyCrudRepository.findById(id).orElse(null));
+
+    }
+
+    @Override
+    public List<Property> getAll() throws BusinessRuleValidationException {
+        List<PropertyJpaModel> jpaModels = Streamable
+                .of(propertyCrudRepository.findAll())
+                .toList();
+        List<Property> propiedads = new ArrayList<>();
+        for (PropertyJpaModel jpaModel : jpaModels) {
+            propiedads.add(PropertyUtils.jpaModelToPropiedad(jpaModel));
+        }
+        return propiedads;
+    }
+
+
+}
