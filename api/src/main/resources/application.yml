@@ -12,7 +12,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/test"
+    url: "jdbc:postgresql://localhost:5432/msproperty"
     username: postgres
     password: root
 
