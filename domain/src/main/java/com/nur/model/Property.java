@@ -17,24 +17,26 @@ public class Property extends Entity {
     private PrecioValue amount;
 
     private String description;
+    private String state;
 
     private UUID userId;
 
 
-
-    public Property(UUID id, String name, double amount, String description, UUID userID) throws BusinessRuleValidationException {
+    public Property(UUID id, String name, double amount, String description, String state, UUID userID) throws BusinessRuleValidationException {
         this.id = id;
         this.name = name;
         this.amount = new PrecioValue(amount);
         this.description = description;
+        this.state = state;
         this.userId = userID;
     }
 
-    public Property(String name, double amount, String description, UUID userID) throws BusinessRuleValidationException {
+    public Property(String name, double amount, String description, String state, UUID userID) throws BusinessRuleValidationException {
         this.name = name;
         this.amount = new PrecioValue(amount);
         this.description = description;
         this.userId = userID;
+        this.state = state;
     }
 
     @Override

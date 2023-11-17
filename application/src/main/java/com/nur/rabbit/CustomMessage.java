@@ -1,21 +1,20 @@
 package com.nur.rabbit;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class CustomMessage {
 
-    private String messageId;
+    private UUID id;
+
     private String message;
-    private Date messageDate;
 
 }

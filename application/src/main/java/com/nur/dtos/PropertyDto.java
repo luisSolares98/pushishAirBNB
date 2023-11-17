@@ -21,5 +21,7 @@ public class PropertyDto {
 
   public double amount;
 
+  public String state;
+
   public String userId;
 }

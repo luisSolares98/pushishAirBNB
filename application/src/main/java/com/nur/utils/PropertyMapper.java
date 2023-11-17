@@ -14,6 +14,7 @@ public class PropertyMapper {
                 .name(property.getName())
                 .amount(property.getAmount().getValue())
                 .description(property.getDescription())
+                .state(property.getState())
                 .userId(property.getUserId().toString()).build();
     }
 }

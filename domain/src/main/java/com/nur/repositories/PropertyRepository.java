@@ -12,7 +12,8 @@ public interface PropertyRepository {
 
     Property findPropertyById(UUID id)
             throws BusinessRuleValidationException;
-
+    UUID deletePropertyById(UUID id)
+            throws BusinessRuleValidationException;
     List<Property> getAll() throws BusinessRuleValidationException;
 
 }

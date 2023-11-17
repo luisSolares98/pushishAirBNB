@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -30,6 +31,18 @@ public class PropertyJpaRepository implements PropertyRepository {
 
         return PropertyUtils.jpaModelToPropiedad(propertyCrudRepository.findById(id).orElse(null));
 
+    }
+
+    @Override
+    public UUID deletePropertyById(UUID id) throws BusinessRuleValidationException {
+
+        PropertyJpaModel propertyJpaModel = propertyCrudRepository.findById(id).orElse(null);
+        if (Objects.isNull(propertyJpaModel)) {
+            throw new BusinessRuleValidationException("not find");
+        }
+        propertyJpaModel.setState("Disable");
+        propertyCrudRepository.save(propertyJpaModel);
+        return id;
     }
 
     @Override

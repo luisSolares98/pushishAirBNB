@@ -25,6 +25,9 @@ public class PropertyJpaModel {
 
     @Column(nullable = false)
     public double amount;
+    
+    @Column(nullable = false)
+    public String state;
 
     @Column(nullable = false)
     public UUID userID;

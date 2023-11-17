@@ -3,6 +3,7 @@ package com.nur.controllers;
 import an.awesome.pipelinr.Pipeline;
 import com.nur.command.characteristicProperty.create.CreateCharacteristicPropertyCommand;
 import com.nur.command.characteristicProperty.list.GetCharacteristicByPropertyQuery;
+import com.nur.command.property.delete.DeletePropertyQuery;
 import com.nur.command.property.listByUserId.GetPropertiesByUserQuery;
 import com.nur.dtos.PropertyCharacteristicDto;
 import com.nur.dtos.PropertyDto;
@@ -51,12 +52,21 @@ public class PropertyController {
 
     @PostMapping("/")
     public PropertyDto createProperty(@RequestBody PropertyDto propertyDto) {
-
+        propertyDto.setState("Active");
         CreatePropertyCommand command = new CreatePropertyCommand(
                 propertyDto
         );
         return command.execute(pipeline);
     }
+
+    @DeleteMapping("/{propertyId}")
+    public PropertyDto dropProperty(@PathVariable String propertyId) {
+        DeletePropertyQuery command = new DeletePropertyQuery(
+                propertyId
+        );
+        return command.execute(pipeline);
+    }
+
     @PostMapping("/characteristic")
     public PropertyCharacteristicDto createCharacteristicProperty(@RequestBody PropertyCharacteristicDto propertyDto) {
 

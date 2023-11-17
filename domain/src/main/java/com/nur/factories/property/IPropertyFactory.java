@@ -7,5 +7,5 @@ import com.nur.model.Property;
 import java.util.UUID;
 
 public interface IPropertyFactory {
-    Property create(String name, double amount, String description, UUID userID) throws BusinessRuleValidationException;
+    Property create(String name, double amount, String description, String state, UUID userID) throws BusinessRuleValidationException;
 }

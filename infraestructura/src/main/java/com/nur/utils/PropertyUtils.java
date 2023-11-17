@@ -18,6 +18,7 @@ public class PropertyUtils {
         propertyJpaModel.setName(propiedad.getName());
         propertyJpaModel.setDescription(propiedad.getDescription());
         propertyJpaModel.setUserID(propiedad.getUserId());
+        propertyJpaModel.setState(propiedad.getState());
         propertyJpaModel.setAmount(propiedad.getAmount().getValue());
         return propertyJpaModel;
     }
@@ -34,6 +35,7 @@ public class PropertyUtils {
                 jpaModel.getName(),
                 jpaModel.getAmount(),
                 jpaModel.getDescription(),
+                jpaModel.getState(),
                 jpaModel.getUserID()
         );
     }
