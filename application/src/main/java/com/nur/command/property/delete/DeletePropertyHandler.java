@@ -7,6 +7,8 @@ import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Property;
 import com.nur.rabbit.Config;
 import com.nur.rabbit.CustomMessage;
+import com.nur.rabbit.Pattern;
+import com.nur.rabbit.Response;
 import com.nur.repositories.PropertyRepository;
 import com.nur.utils.PropertyMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,11 +36,16 @@ public class DeletePropertyHandler
       propertyRepository.deletePropertyById(
               UUID.fromString(command.id)
       );
+
+      Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
+
       CustomMessage message = CustomMessage.builder().id(property.getUserId())
               .message("The Property was successfully Created/Modified").build();
+
+      Response response = Response.builder().data(message).pattern(pattern).build();
+
       // Reddis notify
-      template.convertAndSend(Config.EXCHANGE,
-              Config.ROUTING_KEY, message);
+      template.convertAndSend(Config.EXCHANGE, response);
 
       return PropertyMapper.from(property);
     } catch (BusinessRuleValidationException e) {

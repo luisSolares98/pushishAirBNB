@@ -7,6 +7,8 @@ import com.nur.factories.property.PropertyFactory;
 import com.nur.model.Property;
 import com.nur.rabbit.Config;
 import com.nur.rabbit.CustomMessage;
+import com.nur.rabbit.Pattern;
+import com.nur.rabbit.Response;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,10 +50,16 @@ public class CreatePropertyHandler
                     );
             propertyRepository.update(property);
 
+            Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
+
             CustomMessage message = CustomMessage.builder().id(UUID.fromString(request.propertyDto.getUserId()))
                     .message("The Property was successfully Created/Modified").build();
+
+            Response response = Response.builder().data(message).pattern(pattern).build();
+
+
             // Reddis notify
-            template.convertAndSend(Config.EXCHANGE, message);
+            template.convertAndSend(Config.EXCHANGE, response);
             return PropertyMapper.from(property);
         } catch (BusinessRuleValidationException e) {
             return null;
