@@ -7,6 +7,7 @@ import com.nur.model.Property;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Generated
 public class PropertyUtils {
@@ -30,6 +31,7 @@ public class PropertyUtils {
 
     public static Property jpaModelToPropiedad(PropertyJpaModel jpaModel)
             throws BusinessRuleValidationException {
+        if(Objects.isNull(jpaModel)) throw new BusinessRuleValidationException("jpaModel is null");
         return new Property(
                 jpaModel.getId(),
                 jpaModel.getName(),

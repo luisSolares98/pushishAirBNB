@@ -1,6 +1,7 @@
 package com.nur.rabbit;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.Date;

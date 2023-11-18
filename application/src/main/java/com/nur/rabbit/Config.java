@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
 
-    public static final String QUEUE = "ms_reserve";
+    public static final String QUEUE = "ms_property";
     public static final String EXCHANGE = "ms_user";
     public static final String ROUTING_KEY = "m_service";
 

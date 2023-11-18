@@ -51,8 +51,7 @@ public class CreatePropertyHandler
             CustomMessage message = CustomMessage.builder().id(UUID.fromString(request.propertyDto.getUserId()))
                     .message("The Property was successfully Created/Modified").build();
             // Reddis notify
-            template.convertAndSend(Config.EXCHANGE,
-                    Config.ROUTING_KEY, message);
+            template.convertAndSend(Config.EXCHANGE, message);
             return PropertyMapper.from(property);
         } catch (BusinessRuleValidationException e) {
             return null;
