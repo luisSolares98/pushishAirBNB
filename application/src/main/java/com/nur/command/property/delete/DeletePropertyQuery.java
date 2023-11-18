@@ -6,7 +6,7 @@ import com.nur.model.Property;
 
 import java.util.UUID;
 
-public class DeletePropertyQuery implements Command<PropertyDto> {
+public class DeletePropertyQuery implements Command<UUID> {
 
   String id;
 

@@ -15,6 +15,7 @@ import com.nur.command.property.get.GetPropertyQuery;
 import com.nur.command.property.list.GetPropertiesQuery;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -59,8 +60,8 @@ public class PropertyController {
         return command.execute(pipeline);
     }
 
-    @DeleteMapping("/{propertyId}")
-    public PropertyDto dropProperty(@PathVariable String propertyId) {
+    @GetMapping("/delete/{propertyId}")
+    public UUID dropProperty(@PathVariable String propertyId) {
         DeletePropertyQuery command = new DeletePropertyQuery(
                 propertyId
         );

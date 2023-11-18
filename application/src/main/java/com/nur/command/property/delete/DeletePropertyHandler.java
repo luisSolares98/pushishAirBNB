@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @Component
 public class DeletePropertyHandler
-  implements Command.Handler<DeletePropertyQuery, PropertyDto> {
+  implements Command.Handler<DeletePropertyQuery, UUID> {
 
   private final PropertyRepository propertyRepository;
   @Autowired
@@ -29,7 +29,7 @@ public class DeletePropertyHandler
   }
 
   @Override
-  public PropertyDto handle(DeletePropertyQuery command) {
+  public UUID handle(DeletePropertyQuery command) {
     try {
       Property property = propertyRepository.findPropertyById(UUID.fromString(command.id));
 
@@ -40,14 +40,14 @@ public class DeletePropertyHandler
       Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
 
       CustomMessage message = CustomMessage.builder().id(property.getUserId())
-              .message("The Property was successfully Created/Modified").build();
+              .message("The Property change state").build();
 
       Response response = Response.builder().data(message).pattern(pattern).build();
 
       // Reddis notify
       template.convertAndSend(Config.EXCHANGE, response);
 
-      return PropertyMapper.from(property);
+      return property.getId();
     } catch (BusinessRuleValidationException e) {
       throw new InvalidDataException(e.getMessage());
     }

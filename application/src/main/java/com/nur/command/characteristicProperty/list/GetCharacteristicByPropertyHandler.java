@@ -38,9 +38,14 @@ public class GetCharacteristicByPropertyHandler
       List<Characteristic> list = this.tipo.getAll();
       for (int i = 0; i < resul.size(); i++) {
         PropertyCharacteristicDto element = resul.get(i);
-        System.out.println(element.getCharacteristicId());
-        System.out.println();
-        String name = list.stream().filter(c -> c.getId().equals(UUID.fromString(element.getCharacteristicId()))).toList().get(0).getName();
+        String name = "";
+        for (int j = 0; j < list.size(); j++) {
+          Characteristic characteristic = list.get(j);
+          if(characteristic.getId().equals(UUID.fromString(element.getCharacteristicId()))) {
+            name = characteristic.getName();
+          }
+        }
+        // String name = list.stream().filter(c -> c.getId().equals(UUID.fromString(element.getCharacteristicId()))).toList().get(0).getName();
         resul.get(i).setName(name);
       }
 

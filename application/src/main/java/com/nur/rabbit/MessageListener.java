@@ -28,7 +28,7 @@ public class MessageListener {
             CustomMessage customMessage = CustomMessage.builder().id(property.getUserId()).message("Property reserve success").build();
             Response customMessage2 = Response.builder().pattern(pattern).data(customMessage).build();
             template.convertAndSend(Config.EXCHANGE, customMessage2);
-        } catch (BusinessRuleValidationException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
