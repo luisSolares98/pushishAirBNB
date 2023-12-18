@@ -2,6 +2,7 @@ package com.nur.command.property.get;
 
 import com.nur.core.BusinessRuleValidationException;
 import com.nur.dtos.PropertyDto;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Property;
 import com.nur.repositories.PropertyRepository;
 import com.nur.utils.PropertyMapper;
@@ -30,8 +31,7 @@ public class GetPropertyHandler
       );
       return PropertyMapper.from(property);
     } catch (BusinessRuleValidationException e) {
-      e.printStackTrace();
-      return null;
+      throw new InvalidDataException(e.getMessage());
     }
   }
 }

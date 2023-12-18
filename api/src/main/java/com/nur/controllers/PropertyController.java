@@ -17,7 +17,6 @@ import com.nur.command.property.list.GetPropertiesQuery;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/property")
 public class PropertyController {

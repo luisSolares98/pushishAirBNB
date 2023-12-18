@@ -9,7 +9,6 @@ import com.nur.command.characteristic.create.CreateCharacteristicCommand;
 import com.nur.command.characteristic.list.GetListCharacteristicQuery;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/characteristic")
 public class CharacteristicController {
