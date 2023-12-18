@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString
 public class CustomMessage {
 
-    private UUID id;
+	private UUID id;
 
-    private String message;
+	private String message;
 
 }

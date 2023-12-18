@@ -1,3 +1,5 @@
 package com.nur.core;
 
-public interface Repository {}
+public interface Repository {
+
+}

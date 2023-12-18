@@ -5,9 +5,10 @@ import com.nur.dtos.CharacteristicDto;
 
 public class CreateCharacteristicCommand implements Command<CharacteristicDto> {
 
-  CharacteristicDto characteristic;
+	CharacteristicDto characteristic;
 
-  public CreateCharacteristicCommand(CharacteristicDto characteristic) {
-    this.characteristic = characteristic;
-  }
+	public CreateCharacteristicCommand(CharacteristicDto characteristic) {
+		this.characteristic = characteristic;
+	}
+
 }

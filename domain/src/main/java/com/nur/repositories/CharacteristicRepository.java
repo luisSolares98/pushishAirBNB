@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public interface CharacteristicRepository {
 
-    UUID update(Characteristic tipo);
+	UUID update(Characteristic tipo);
 
-    List<Characteristic> getAll() throws BusinessRuleValidationException;
+	List<Characteristic> getAll() throws BusinessRuleValidationException;
+
 }

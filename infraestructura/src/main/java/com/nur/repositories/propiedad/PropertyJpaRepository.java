@@ -18,43 +18,41 @@ import java.util.UUID;
 @Service
 public class PropertyJpaRepository implements PropertyRepository {
 
-    @Autowired
-    private PropertyCrudRepository propertyCrudRepository;
+	@Autowired
+	private PropertyCrudRepository propertyCrudRepository;
 
-    @Override
-    public UUID update(Property propiedad) {
-        PropertyJpaModel propiedadJpaModel = PropertyUtils.propiedadToJpaEntity(propiedad);
-        return propertyCrudRepository.save(propiedadJpaModel).getId();
-    }
+	@Override
+	public UUID update(Property propiedad) {
+		PropertyJpaModel propiedadJpaModel = PropertyUtils.propiedadToJpaEntity(propiedad);
+		return propertyCrudRepository.save(propiedadJpaModel).getId();
+	}
 
-    @Override
-    public Property findPropertyById(UUID id) throws BusinessRuleValidationException {
+	@Override
+	public Property findPropertyById(UUID id) throws BusinessRuleValidationException {
 
-        return PropertyUtils.jpaModelToPropiedad(propertyCrudRepository.findById(id).orElse(null));
+		return PropertyUtils.jpaModelToPropiedad(propertyCrudRepository.findById(id).orElse(null));
 
-    }
+	}
 
-    @Override
-    public UUID deletePropertyById(UUID id) throws BusinessRuleValidationException {
+	@Override
+	public UUID deletePropertyById(UUID id) throws BusinessRuleValidationException {
 
-        PropertyJpaModel propertyJpaModel = propertyCrudRepository.findById(id).orElse(null);
-        if(Objects.isNull(propertyJpaModel)) throw new InvalidDataException("jpaModel is null");
-        propertyJpaModel.setState("Disable");
-        propertyCrudRepository.save(propertyJpaModel);
-        return id;
-    }
+		PropertyJpaModel propertyJpaModel = propertyCrudRepository.findById(id).orElse(null);
+		if (Objects.isNull(propertyJpaModel))
+			throw new InvalidDataException("jpaModel is null");
+		propertyJpaModel.setState("Disable");
+		propertyCrudRepository.save(propertyJpaModel);
+		return id;
+	}
 
-    @Override
-    public List<Property> getAll() throws BusinessRuleValidationException {
-        List<PropertyJpaModel> jpaModels = Streamable
-                .of(propertyCrudRepository.findAll())
-                .toList();
-        List<Property> propiedads = new ArrayList<>();
-        for (PropertyJpaModel jpaModel : jpaModels) {
-            propiedads.add(PropertyUtils.jpaModelToPropiedad(jpaModel));
-        }
-        return propiedads;
-    }
-
+	@Override
+	public List<Property> getAll() throws BusinessRuleValidationException {
+		List<PropertyJpaModel> jpaModels = Streamable.of(propertyCrudRepository.findAll()).toList();
+		List<Property> propiedads = new ArrayList<>();
+		for (PropertyJpaModel jpaModel : jpaModels) {
+			propiedads.add(PropertyUtils.jpaModelToPropiedad(jpaModel));
+		}
+		return propiedads;
+	}
 
 }

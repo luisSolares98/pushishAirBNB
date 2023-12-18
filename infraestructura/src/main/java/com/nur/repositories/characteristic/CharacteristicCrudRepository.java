@@ -9,4 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface CharacteristicCrudRepository extends JpaRepository<CharacteristicJpaModel, UUID> {
+
 }

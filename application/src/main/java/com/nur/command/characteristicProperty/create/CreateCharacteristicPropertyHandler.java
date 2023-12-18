@@ -13,35 +13,33 @@ import java.util.UUID;
 
 @Component
 public class CreateCharacteristicPropertyHandler
-        implements Command.Handler<CreateCharacteristicPropertyCommand, PropertyCharacteristicDto> {
+		implements Command.Handler<CreateCharacteristicPropertyCommand, PropertyCharacteristicDto> {
 
-    private final CharacteristicPropertyRepository repository;
+	private final CharacteristicPropertyRepository repository;
 
-    private final CharacteristicPropertyFactory factory;
+	private final CharacteristicPropertyFactory factory;
 
+	public CreateCharacteristicPropertyHandler(CharacteristicPropertyRepository repository
 
-    public CreateCharacteristicPropertyHandler(
-            CharacteristicPropertyRepository repository
+	) {
+		this.repository = repository;
 
-    ) {
-        this.repository = repository;
+		this.factory = new CharacteristicPropertyFactory();
+	}
 
-        this.factory = new CharacteristicPropertyFactory();
-    }
+	@Override
+	public PropertyCharacteristicDto handle(CreateCharacteristicPropertyCommand request) {
+		try {
+			CharacteristicProperty property = factory.create(UUID.fromString(request.dto.getCharacteristicId()),
+					UUID.fromString(request.dto.getPropertyId())
 
-    @Override
-    public PropertyCharacteristicDto handle(CreateCharacteristicPropertyCommand request) {
-        try {
-            CharacteristicProperty property =
-                    factory.create(
-                            UUID.fromString(request.dto.getCharacteristicId()),
-                            UUID.fromString(request.dto.getPropertyId())
+			);
+			repository.update(property);
+			return CharacteristicPropertyMapper.from(property);
+		}
+		catch (BusinessRuleValidationException e) {
+			return null;
+		}
+	}
 
-                    );
-            repository.update(property);
-            return CharacteristicPropertyMapper.from(property);
-        } catch (BusinessRuleValidationException e) {
-            return null;
-        }
-    }
 }

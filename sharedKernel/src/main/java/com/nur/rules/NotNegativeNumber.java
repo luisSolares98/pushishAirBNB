@@ -2,20 +2,22 @@ package com.nur.rules;
 
 import com.nur.core.BusinessRule;
 
-public class NotNegativeNumber  implements BusinessRule {
+public class NotNegativeNumber implements BusinessRule {
 
-    private final Double amount;
+	private final Double amount;
 
-    public NotNegativeNumber(Double amount) {
-        this.amount = amount;
-    }
-    @Override
-    public boolean isValid() {
-        return amount > 0;
-    }
+	public NotNegativeNumber(Double amount) {
+		this.amount = amount;
+	}
 
-    @Override
-    public String getMessage() {
-        return "Price value cannot be negative";
-    }
+	@Override
+	public boolean isValid() {
+		return amount > 0;
+	}
+
+	@Override
+	public String getMessage() {
+		return "Price value cannot be negative";
+	}
+
 }

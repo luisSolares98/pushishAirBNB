@@ -21,58 +21,56 @@ import java.util.UUID;
 @RequestMapping("/property")
 public class PropertyController {
 
-    Logger logger = LoggerFactory.getLogger(PropertyController.class);
-    final Pipeline pipeline;
+	Logger logger = LoggerFactory.getLogger(PropertyController.class);
 
-    public PropertyController(Pipeline pipeline) {
-        this.pipeline = pipeline;
-    }
+	final Pipeline pipeline;
 
-    @GetMapping("/{propId}")
-    public PropertyDto getProperty(@PathVariable String propId) {
-        GetPropertyQuery query = new GetPropertyQuery(propId);
-        return query.execute(pipeline);
-    }
+	public PropertyController(Pipeline pipeline) {
+		this.pipeline = pipeline;
+	}
 
-    @GetMapping("/")
-    public List<PropertyDto> getListAllProperty() {
-        GetPropertiesQuery query = new GetPropertiesQuery();
-        return query.execute(pipeline);
-    }
-    @GetMapping("/characteristic/{propertyId}")
-    public List<PropertyCharacteristicDto> getCharacteristicByPropertyId(@PathVariable String propertyId) {
-        GetCharacteristicByPropertyQuery query = new GetCharacteristicByPropertyQuery(propertyId);
-        return query.execute(pipeline);
-    }
-    @GetMapping("/users/{userId}")
-    public List<PropertyDto> getListAllPropertyByUserId(@PathVariable String userId) {
-        GetPropertiesByUserQuery query = new GetPropertiesByUserQuery(userId);
-        return query.execute(pipeline);
-    }
+	@GetMapping("/{propId}")
+	public PropertyDto getProperty(@PathVariable String propId) {
+		GetPropertyQuery query = new GetPropertyQuery(propId);
+		return query.execute(pipeline);
+	}
 
-    @PostMapping("/")
-    public PropertyDto createProperty(@RequestBody PropertyDto propertyDto) {
-        propertyDto.setState("Active");
-        CreatePropertyCommand command = new CreatePropertyCommand(
-                propertyDto
-        );
-        return command.execute(pipeline);
-    }
+	@GetMapping("/")
+	public List<PropertyDto> getListAllProperty() {
+		GetPropertiesQuery query = new GetPropertiesQuery();
+		return query.execute(pipeline);
+	}
 
-    @GetMapping("/delete/{propertyId}")
-    public UUID dropProperty(@PathVariable String propertyId) {
-        DeletePropertyQuery command = new DeletePropertyQuery(
-                propertyId
-        );
-        return command.execute(pipeline);
-    }
+	@GetMapping("/characteristic/{propertyId}")
+	public List<PropertyCharacteristicDto> getCharacteristicByPropertyId(@PathVariable String propertyId) {
+		GetCharacteristicByPropertyQuery query = new GetCharacteristicByPropertyQuery(propertyId);
+		return query.execute(pipeline);
+	}
 
-    @PostMapping("/characteristic")
-    public PropertyCharacteristicDto createCharacteristicProperty(@RequestBody PropertyCharacteristicDto propertyDto) {
+	@GetMapping("/users/{userId}")
+	public List<PropertyDto> getListAllPropertyByUserId(@PathVariable String userId) {
+		GetPropertiesByUserQuery query = new GetPropertiesByUserQuery(userId);
+		return query.execute(pipeline);
+	}
 
-        CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(
-                propertyDto
-        );
-        return command.execute(pipeline);
-    }
+	@PostMapping("/")
+	public PropertyDto createProperty(@RequestBody PropertyDto propertyDto) {
+		propertyDto.setState("Active");
+		CreatePropertyCommand command = new CreatePropertyCommand(propertyDto);
+		return command.execute(pipeline);
+	}
+
+	@GetMapping("/delete/{propertyId}")
+	public UUID dropProperty(@PathVariable String propertyId) {
+		DeletePropertyQuery command = new DeletePropertyQuery(propertyId);
+		return command.execute(pipeline);
+	}
+
+	@PostMapping("/characteristic")
+	public PropertyCharacteristicDto createCharacteristicProperty(@RequestBody PropertyCharacteristicDto propertyDto) {
+
+		CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(propertyDto);
+		return command.execute(pipeline);
+	}
+
 }

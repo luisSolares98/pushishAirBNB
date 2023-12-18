@@ -12,22 +12,24 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class GetPropertiesByUserHandler
-        implements Command.Handler<GetPropertiesByUserQuery, List<PropertyDto>> {
+public class GetPropertiesByUserHandler implements Command.Handler<GetPropertiesByUserQuery, List<PropertyDto>> {
 
-  private final PropertyRepository propiedadRepository;
+	private final PropertyRepository propiedadRepository;
 
-  public GetPropertiesByUserHandler(PropertyRepository propiedadRepository) {
-    this.propiedadRepository = propiedadRepository;
-  }
+	public GetPropertiesByUserHandler(PropertyRepository propiedadRepository) {
+		this.propiedadRepository = propiedadRepository;
+	}
 
-  @Override
-  public List<PropertyDto> handle(GetPropertiesByUserQuery command) {
-    try {
-      List<Property> properties = this.propiedadRepository.getAll();
-      return properties.stream().filter(c -> c.getUserId().equals(UUID.fromString(command.userId))).map(PropertyMapper::from).toList();
-    } catch (BusinessRuleValidationException e) {
-      throw new RuntimeException(e.getMessage());
-    }
-  }
+	@Override
+	public List<PropertyDto> handle(GetPropertiesByUserQuery command) {
+		try {
+			List<Property> properties = this.propiedadRepository.getAll();
+			return properties.stream().filter(c -> c.getUserId().equals(UUID.fromString(command.userId)))
+					.map(PropertyMapper::from).toList();
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
 }

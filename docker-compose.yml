@@ -1,0 +1,21 @@
+services:
+  propertyNur:
+    build:
+      context: .
+    container_name: propertyNur-spring
+    image: luissolares98/msreserva:latest
+    ports:
+      - 9092:8080
+    depends_on:
+      - postgres
+  postgres:
+    container_name: propertyNur-db
+    image: postgres:16-alpine
+    ports:
+      - 6969:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=msproperty

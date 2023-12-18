@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CharacteristicPropertyRepository {
-    UUID update(CharacteristicProperty tipo);
 
-    List<CharacteristicProperty> getAllByProperty() throws BusinessRuleValidationException;
+	UUID update(CharacteristicProperty tipo);
 
+	List<CharacteristicProperty> getAllByProperty() throws BusinessRuleValidationException;
 
 }

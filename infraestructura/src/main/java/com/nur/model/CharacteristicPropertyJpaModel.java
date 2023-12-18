@@ -15,13 +15,14 @@ import java.util.UUID;
 @Table(name = "CharacteristicProperty")
 public class CharacteristicPropertyJpaModel {
 
-    @Id
-    @Column(nullable = false)
-    public UUID id;
+	@Id
+	@Column(nullable = false)
+	public UUID id;
 
-    @Column(name="characteristicId",nullable = false)
-    public UUID characteristicId;
+	@Column(name = "characteristicId", nullable = false)
+	public UUID characteristicId;
 
-    @Column(name="propertyId",nullable = false)
-    public UUID propertyId;
+	@Column(name = "propertyId", nullable = false)
+	public UUID propertyId;
+
 }

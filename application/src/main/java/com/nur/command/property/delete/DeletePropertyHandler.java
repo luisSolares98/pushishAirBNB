@@ -18,38 +18,39 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class DeletePropertyHandler
-  implements Command.Handler<DeletePropertyQuery, UUID> {
+public class DeletePropertyHandler implements Command.Handler<DeletePropertyQuery, UUID> {
 
-  private final PropertyRepository propertyRepository;
-  @Autowired
-  private RabbitTemplate template;
-  public DeletePropertyHandler(PropertyRepository propiedadRepository) {
-    this.propertyRepository = propiedadRepository;
-  }
+	private final PropertyRepository propertyRepository;
 
-  @Override
-  public UUID handle(DeletePropertyQuery command) {
-    try {
-      Property property = propertyRepository.findPropertyById(UUID.fromString(command.id));
+	@Autowired
+	private RabbitTemplate template;
 
-      propertyRepository.deletePropertyById(
-              UUID.fromString(command.id)
-      );
+	public DeletePropertyHandler(PropertyRepository propiedadRepository) {
+		this.propertyRepository = propiedadRepository;
+	}
 
-      Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
+	@Override
+	public UUID handle(DeletePropertyQuery command) {
+		try {
+			Property property = propertyRepository.findPropertyById(UUID.fromString(command.id));
 
-      CustomMessage message = CustomMessage.builder().id(property.getUserId())
-              .message("The Property change state").build();
+			propertyRepository.deletePropertyById(UUID.fromString(command.id));
 
-      Response response = Response.builder().data(message).pattern(pattern).build();
+			Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
 
-      // Reddis notify
-      template.convertAndSend(Config.EXCHANGE, response);
+			CustomMessage message = CustomMessage.builder().id(property.getUserId())
+					.message("The Property change state").build();
 
-      return property.getId();
-    } catch (BusinessRuleValidationException e) {
-      throw new InvalidDataException(e.getMessage());
-    }
-  }
+			Response response = Response.builder().data(message).pattern(pattern).build();
+
+			// Reddis notify
+			template.convertAndSend(Config.EXCHANGE, response);
+
+			return property.getId();
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new InvalidDataException(e.getMessage());
+		}
+	}
+
 }

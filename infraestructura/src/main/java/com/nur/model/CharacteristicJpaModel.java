@@ -10,11 +10,11 @@ import java.util.UUID;
 @Table(name = "characteristic")
 public class CharacteristicJpaModel {
 
-    @Id
-    @Column(nullable = false)
-    public UUID id;
+	@Id
+	@Column(nullable = false)
+	public UUID id;
 
-    @Column(nullable = false)
-    public String name;
+	@Column(nullable = false)
+	public String name;
 
 }

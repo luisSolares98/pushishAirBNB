@@ -5,9 +5,10 @@ import com.nur.dtos.PropertyDto;
 
 public class CreatePropertyCommand implements Command<PropertyDto> {
 
-  PropertyDto propertyDto;
+	PropertyDto propertyDto;
 
-  public CreatePropertyCommand(PropertyDto propertyDto) {
-    this.propertyDto = propertyDto;
-  }
+	public CreatePropertyCommand(PropertyDto propertyDto) {
+		this.propertyDto = propertyDto;
+	}
+
 }

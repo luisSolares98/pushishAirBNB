@@ -7,8 +7,10 @@ import java.util.List;
 
 public class GetPropertiesByUserQuery implements Command<List<PropertyDto>> {
 
-  public final String userId;
-  public GetPropertiesByUserQuery(String userId) {
-    this.userId = userId;
-  }
+	public final String userId;
+
+	public GetPropertiesByUserQuery(String userId) {
+		this.userId = userId;
+	}
+
 }

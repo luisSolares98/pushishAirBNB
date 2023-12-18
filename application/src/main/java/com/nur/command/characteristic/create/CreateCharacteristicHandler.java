@@ -10,34 +10,30 @@ import com.nur.repositories.CharacteristicRepository;
 import com.nur.utils.CharacteristicMapper;
 
 @Component
-public class CreateCharacteristicHandler
-  implements Command.Handler<CreateCharacteristicCommand, CharacteristicDto> {
+public class CreateCharacteristicHandler implements Command.Handler<CreateCharacteristicCommand, CharacteristicDto> {
 
-  private final CharacteristicRepository characteristicRepository;
+	private final CharacteristicRepository characteristicRepository;
 
-  private final CharacteristicFactory characteristicFactory;
+	private final CharacteristicFactory characteristicFactory;
 
+	public CreateCharacteristicHandler(CharacteristicRepository characteristicRepository
 
-  public CreateCharacteristicHandler(
-          CharacteristicRepository characteristicRepository
+	) {
+		this.characteristicRepository = characteristicRepository;
 
-  ) {
-    this.characteristicRepository = characteristicRepository;
+		this.characteristicFactory = new CharacteristicFactory();
+	}
 
-    this.characteristicFactory = new CharacteristicFactory();
-  }
+	@Override
+	public CharacteristicDto handle(CreateCharacteristicCommand request) {
+		try {
+			Characteristic characteristic = characteristicFactory.create(request.characteristic.getName());
+			characteristicRepository.update(characteristic);
+			return CharacteristicMapper.from(characteristic);
+		}
+		catch (BusinessRuleValidationException e) {
+			return null;
+		}
+	}
 
-  @Override
-  public CharacteristicDto handle(CreateCharacteristicCommand request) {
-    try {
-     Characteristic characteristic =
-        characteristicFactory.create(
-          request.characteristic.getName()
-        );
-      characteristicRepository.update(characteristic);
-      return CharacteristicMapper.from(characteristic);
-    } catch (BusinessRuleValidationException e) {
-      return null;
-    }
-  }
 }

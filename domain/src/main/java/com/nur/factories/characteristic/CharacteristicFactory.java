@@ -5,8 +5,9 @@ import com.nur.model.Characteristic;
 
 public class CharacteristicFactory implements ICharacteristicFactory {
 
-    @Override
-    public Characteristic create(String name) throws BusinessRuleValidationException {
-        return new Characteristic(name);
-    }
+	@Override
+	public Characteristic create(String name) throws BusinessRuleValidationException {
+		return new Characteristic(name);
+	}
+
 }

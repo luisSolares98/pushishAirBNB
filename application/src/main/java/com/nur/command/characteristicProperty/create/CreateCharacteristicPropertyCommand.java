@@ -6,9 +6,10 @@ import an.awesome.pipelinr.Command;
 
 public class CreateCharacteristicPropertyCommand implements Command<PropertyCharacteristicDto> {
 
-  PropertyCharacteristicDto dto;
+	PropertyCharacteristicDto dto;
 
-  public CreateCharacteristicPropertyCommand(PropertyCharacteristicDto propertyDto) {
-    this.dto = propertyDto;
-  }
+	public CreateCharacteristicPropertyCommand(PropertyCharacteristicDto propertyDto) {
+		this.dto = propertyDto;
+	}
+
 }

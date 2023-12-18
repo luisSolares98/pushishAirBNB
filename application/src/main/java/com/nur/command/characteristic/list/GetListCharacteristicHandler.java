@@ -13,21 +13,23 @@ import java.util.List;
 
 @Component
 public class GetListCharacteristicHandler
-        implements Command.Handler<GetListCharacteristicQuery, List<CharacteristicDto>> {
+		implements Command.Handler<GetListCharacteristicQuery, List<CharacteristicDto>> {
 
-  private final CharacteristicRepository tipo;
+	private final CharacteristicRepository tipo;
 
-  public GetListCharacteristicHandler(CharacteristicRepository tipo) {
-    this.tipo = tipo;
-  }
+	public GetListCharacteristicHandler(CharacteristicRepository tipo) {
+		this.tipo = tipo;
+	}
 
-  @Override
-  public List<CharacteristicDto> handle(GetListCharacteristicQuery command) {
-    try {
-      List<Characteristic> list = this.tipo.getAll();
-      return list.stream().map(CharacteristicMapper::from).toList();
-    } catch (BusinessRuleValidationException e) {
-      throw new InvalidDataException(e.getMessage());
-    }
-  }
+	@Override
+	public List<CharacteristicDto> handle(GetListCharacteristicQuery command) {
+		try {
+			List<Characteristic> list = this.tipo.getAll();
+			return list.stream().map(CharacteristicMapper::from).toList();
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new InvalidDataException(e.getMessage());
+		}
+	}
+
 }

@@ -13,34 +13,31 @@ import java.util.Objects;
 @Generated
 public class PropertyUtils {
 
-    public static PropertyJpaModel propiedadToJpaEntity(Property propiedad) {
-        if(Objects.isNull(propiedad)) throw new InvalidDataException("property is null");
-        PropertyJpaModel propertyJpaModel = new PropertyJpaModel();
-        propertyJpaModel.setId(propiedad.getId());
-        propertyJpaModel.setName(propiedad.getName());
-        propertyJpaModel.setDescription(propiedad.getDescription());
-        propertyJpaModel.setUserID(propiedad.getUserId());
-        propertyJpaModel.setState(propiedad.getState());
-        propertyJpaModel.setAmount(propiedad.getAmount().getValue());
-        return propertyJpaModel;
-    }
+	public static PropertyJpaModel propiedadToJpaEntity(Property propiedad) {
+		if (Objects.isNull(propiedad))
+			throw new InvalidDataException("property is null");
+		PropertyJpaModel propertyJpaModel = new PropertyJpaModel();
+		propertyJpaModel.setId(propiedad.getId());
+		propertyJpaModel.setName(propiedad.getName());
+		propertyJpaModel.setDescription(propiedad.getDescription());
+		propertyJpaModel.setUserID(propiedad.getUserId());
+		propertyJpaModel.setState(propiedad.getState());
+		propertyJpaModel.setAmount(propiedad.getAmount().getValue());
+		return propertyJpaModel;
+	}
 
-    public static List<PropertyJpaModel> propiedadToJpaEntities(List<Property> propiedades) {
-        if (propiedades == null) return Collections.emptyList();
-        return propiedades.stream().map(PropertyUtils::propiedadToJpaEntity).toList();
-    }
+	public static List<PropertyJpaModel> propiedadToJpaEntities(List<Property> propiedades) {
+		if (propiedades == null)
+			return Collections.emptyList();
+		return propiedades.stream().map(PropertyUtils::propiedadToJpaEntity).toList();
+	}
 
-    public static Property jpaModelToPropiedad(PropertyJpaModel jpaModel)
-            throws BusinessRuleValidationException {
-        if(Objects.isNull(jpaModel)) throw new InvalidDataException("jpaModel is null");
+	public static Property jpaModelToPropiedad(PropertyJpaModel jpaModel) throws BusinessRuleValidationException {
+		if (Objects.isNull(jpaModel))
+			throw new InvalidDataException("jpaModel is null");
 
-        return new Property(
-                jpaModel.getId(),
-                jpaModel.getName(),
-                jpaModel.getAmount(),
-                jpaModel.getDescription(),
-                jpaModel.getState(),
-                jpaModel.getUserID()
-        );
-    }
+		return new Property(jpaModel.getId(), jpaModel.getName(), jpaModel.getAmount(), jpaModel.getDescription(),
+				jpaModel.getState(), jpaModel.getUserID());
+	}
+
 }

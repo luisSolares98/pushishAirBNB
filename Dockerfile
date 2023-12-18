@@ -13,6 +13,6 @@ ENV TZ=America/La_Paz
 
 RUN cp /usr/share/zoneinfo/America/La_Paz /etc/localtime
 
-EXPOSE 8082
-ENTRYPOINT ["java", "-jar", "/api.jar", "--server.port=8082"]
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/api.jar", "--server.port=8080"]
 

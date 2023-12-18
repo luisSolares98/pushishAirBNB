@@ -7,5 +7,7 @@ import java.util.List;
 
 public class GetListCharacteristicQuery implements Command<List<CharacteristicDto>> {
 
-  public GetListCharacteristicQuery() {}
+	public GetListCharacteristicQuery() {
+	}
+
 }

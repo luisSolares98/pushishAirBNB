@@ -6,9 +6,10 @@ import an.awesome.pipelinr.Command;
 
 public class DeletePropertyQuery implements Command<UUID> {
 
-  String id;
+	String id;
 
-  public DeletePropertyQuery(String id) {
-    this.id = id;
-  }
+	public DeletePropertyQuery(String id) {
+		this.id = id;
+	}
+
 }

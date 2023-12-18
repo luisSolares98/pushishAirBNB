@@ -6,9 +6,10 @@ import an.awesome.pipelinr.Command;
 
 public class GetPropertyQuery implements Command<PropertyDto> {
 
-  String id;
+	String id;
 
-  public GetPropertyQuery(String id) {
-    this.id = id;
-  }
+	public GetPropertyQuery(String id) {
+		this.id = id;
+	}
+
 }

@@ -8,12 +8,12 @@ import java.util.UUID;
 
 public interface PropertyRepository {
 
-    UUID update(Property property);
+	UUID update(Property property);
 
-    Property findPropertyById(UUID id)
-            throws BusinessRuleValidationException;
-    UUID deletePropertyById(UUID id)
-            throws BusinessRuleValidationException;
-    List<Property> getAll() throws BusinessRuleValidationException;
+	Property findPropertyById(UUID id) throws BusinessRuleValidationException;
+
+	UUID deletePropertyById(UUID id) throws BusinessRuleValidationException;
+
+	List<Property> getAll() throws BusinessRuleValidationException;
 
 }

@@ -14,24 +14,23 @@ import java.util.UUID;
 import an.awesome.pipelinr.Command;
 
 @Component
-public class GetPropertyHandler
-  implements Command.Handler<GetPropertyQuery, PropertyDto> {
+public class GetPropertyHandler implements Command.Handler<GetPropertyQuery, PropertyDto> {
 
-  private final PropertyRepository propiedadRepository;
+	private final PropertyRepository propiedadRepository;
 
-  public GetPropertyHandler(PropertyRepository propiedadRepository) {
-    this.propiedadRepository = propiedadRepository;
-  }
+	public GetPropertyHandler(PropertyRepository propiedadRepository) {
+		this.propiedadRepository = propiedadRepository;
+	}
 
-  @Override
-  public PropertyDto handle(GetPropertyQuery command) {
-    try {
-      Property property = propiedadRepository.findPropertyById(
-              UUID.fromString(command.id)
-      );
-      return PropertyMapper.from(property);
-    } catch (BusinessRuleValidationException e) {
-      throw new InvalidDataException(e.getMessage());
-    }
-  }
+	@Override
+	public PropertyDto handle(GetPropertyQuery command) {
+		try {
+			Property property = propiedadRepository.findPropertyById(UUID.fromString(command.id));
+			return PropertyMapper.from(property);
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new InvalidDataException(e.getMessage());
+		}
+	}
+
 }

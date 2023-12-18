@@ -8,5 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Pattern {
-    private String cmd;
+
+	private String cmd;
+
 }

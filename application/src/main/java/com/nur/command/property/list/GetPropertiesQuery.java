@@ -7,4 +7,5 @@ import java.util.List;
 
 @AllArgsConstructor
 public class GetPropertiesQuery implements Command<List<PropertyDto>> {
+
 }

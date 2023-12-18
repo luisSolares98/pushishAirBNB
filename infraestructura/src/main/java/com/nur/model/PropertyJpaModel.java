@@ -13,22 +13,23 @@ import java.util.UUID;
 @Table(name = "property")
 public class PropertyJpaModel {
 
-    @Id
-    @Column(nullable = false)
-    public UUID id;
+	@Id
+	@Column(nullable = false)
+	public UUID id;
 
-    @Column(nullable = false)
-    public String name;
+	@Column(nullable = false)
+	public String name;
 
-    @Column(nullable = false)
-    public String description;
+	@Column(nullable = false)
+	public String description;
 
-    @Column(nullable = false)
-    public double amount;
-    
-    @Column(nullable = false)
-    public String state;
+	@Column(nullable = false)
+	public double amount;
 
-    @Column(nullable = false)
-    public UUID userID;
+	@Column(nullable = false)
+	public String state;
+
+	@Column(nullable = false)
+	public UUID userID;
+
 }

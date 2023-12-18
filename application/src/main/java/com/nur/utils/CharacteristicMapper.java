@@ -5,13 +5,14 @@ import com.nur.model.Characteristic;
 
 public class CharacteristicMapper {
 
-    private CharacteristicMapper() {
-        throw new IllegalStateException("Utility class");
-    }
+	private CharacteristicMapper() {
+		throw new IllegalStateException("Utility class");
+	}
 
-    public static CharacteristicDto from(Characteristic characteristic) {
-        if (characteristic == null) return CharacteristicDto.builder().build();
-        return CharacteristicDto.builder().id(characteristic.getId().toString()).name(characteristic.getName()).build();
-    }
+	public static CharacteristicDto from(Characteristic characteristic) {
+		if (characteristic == null)
+			return CharacteristicDto.builder().build();
+		return CharacteristicDto.builder().id(characteristic.getId().toString()).name(characteristic.getName()).build();
+	}
 
 }

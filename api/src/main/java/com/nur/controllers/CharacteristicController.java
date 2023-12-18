@@ -13,26 +13,25 @@ import java.util.List;
 @RequestMapping("/characteristic")
 public class CharacteristicController {
 
-    Logger logger = LoggerFactory.getLogger(CharacteristicController.class);
-    final Pipeline pipeline;
+	Logger logger = LoggerFactory.getLogger(CharacteristicController.class);
 
-    public CharacteristicController(Pipeline pipeline) {
-        this.pipeline = pipeline;
-    }
+	final Pipeline pipeline;
 
+	public CharacteristicController(Pipeline pipeline) {
+		this.pipeline = pipeline;
+	}
 
-    @GetMapping("/")
-    public List<CharacteristicDto> getListAll() {
-        GetListCharacteristicQuery query = new GetListCharacteristicQuery();
-        return query.execute(pipeline);
-    }
+	@GetMapping("/")
+	public List<CharacteristicDto> getListAll() {
+		GetListCharacteristicQuery query = new GetListCharacteristicQuery();
+		return query.execute(pipeline);
+	}
 
-    @PostMapping("/")
-    public CharacteristicDto createCharacteristic(@RequestBody CharacteristicDto tipoDto) {
+	@PostMapping("/")
+	public CharacteristicDto createCharacteristic(@RequestBody CharacteristicDto tipoDto) {
 
-        CreateCharacteristicCommand command = new CreateCharacteristicCommand(
-                tipoDto
-        );
-        return command.execute(pipeline);
-    }
+		CreateCharacteristicCommand command = new CreateCharacteristicCommand(tipoDto);
+		return command.execute(pipeline);
+	}
+
 }

@@ -19,39 +19,42 @@ import an.awesome.pipelinr.Command;
 
 @Component
 public class GetCharacteristicByPropertyHandler
-        implements Command.Handler<GetCharacteristicByPropertyQuery, List<PropertyCharacteristicDto>> {
+		implements Command.Handler<GetCharacteristicByPropertyQuery, List<PropertyCharacteristicDto>> {
 
-  private final CharacteristicPropertyRepository repository;
+	private final CharacteristicPropertyRepository repository;
 
-  @Autowired
-  private  CharacteristicRepository tipo;
+	@Autowired
+	private CharacteristicRepository tipo;
 
+	public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository) {
+		this.repository = repository;
+	}
 
-  public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository) {
-    this.repository = repository;
-  }
+	@Override
+	public List<PropertyCharacteristicDto> handle(GetCharacteristicByPropertyQuery command) {
+		try {
+			List<CharacteristicProperty> properties = this.repository.getAllByProperty();
 
-  @Override
-  public List<PropertyCharacteristicDto> handle(GetCharacteristicByPropertyQuery command) {
-    try {
-      List<CharacteristicProperty> properties = this.repository.getAllByProperty();
+			List<PropertyCharacteristicDto> resul = properties.stream()
+					.filter(c -> c.getPropertyId().equals(UUID.fromString(command.property)))
+					.map(CharacteristicPropertyMapper::from).toList();
 
-      List<PropertyCharacteristicDto> resul = properties.stream().filter(c -> c.getPropertyId().equals(UUID.fromString(command.property))).map(CharacteristicPropertyMapper::from).toList();
+			List<Characteristic> list = this.tipo.getAll();
+			for (PropertyCharacteristicDto element : resul) {
+				String name = "";
+				for (Characteristic characteristic : list) {
+					if (characteristic.getId().equals(UUID.fromString(element.getCharacteristicId()))) {
+						name = characteristic.getName();
+					}
+				}
+				element.setName(name);
+			}
 
-      List<Characteristic> list = this.tipo.getAll();
-      for (PropertyCharacteristicDto element : resul) {
-        String name = "";
-        for (Characteristic characteristic : list) {
-          if (characteristic.getId().equals(UUID.fromString(element.getCharacteristicId()))) {
-            name = characteristic.getName();
-          }
-        }
-        element.setName(name);
-      }
+			return resul;
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new InvalidDataException(e.getMessage());
+		}
+	}
 
-      return resul;
-    } catch (BusinessRuleValidationException e) {
-      throw new InvalidDataException(e.getMessage());
-    }
-  }
 }

@@ -11,22 +11,23 @@ import com.nur.utils.PropertyMapper;
 import java.util.List;
 
 @Component
-public class GetPropertiesHandler
-        implements Command.Handler<GetPropertiesQuery, List<PropertyDto>> {
+public class GetPropertiesHandler implements Command.Handler<GetPropertiesQuery, List<PropertyDto>> {
 
-  private final PropertyRepository propiedadRepository;
+	private final PropertyRepository propiedadRepository;
 
-  public GetPropertiesHandler(PropertyRepository propiedadRepository) {
-    this.propiedadRepository = propiedadRepository;
-  }
+	public GetPropertiesHandler(PropertyRepository propiedadRepository) {
+		this.propiedadRepository = propiedadRepository;
+	}
 
-  @Override
-  public List<PropertyDto> handle(GetPropertiesQuery command) {
-    try {
-      List<Property> properties = this.propiedadRepository.getAll();
-      return properties.stream().map(PropertyMapper::from).toList();
-    } catch (BusinessRuleValidationException e) {
-      throw new RuntimeException(e.getMessage());
-    }
-  }
+	@Override
+	public List<PropertyDto> handle(GetPropertiesQuery command) {
+		try {
+			List<Property> properties = this.propiedadRepository.getAll();
+			return properties.stream().map(PropertyMapper::from).toList();
+		}
+		catch (BusinessRuleValidationException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
 }

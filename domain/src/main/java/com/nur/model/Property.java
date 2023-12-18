@@ -6,40 +6,42 @@ import com.nur.objects.PrecioValue;
 import lombok.Getter;
 
 import java.util.UUID;
+
 @Getter
 public class Property extends Entity {
 
+	private String name;
 
-    private String name;
+	private PrecioValue amount;
 
-    private PrecioValue amount;
+	private String description;
 
-    private String description;
-    private String state;
+	private String state;
 
-    private UUID userId;
+	private UUID userId;
 
+	public Property(UUID id, String name, double amount, String description, String state, UUID userID)
+			throws BusinessRuleValidationException {
+		this.id = id;
+		this.name = name;
+		this.amount = new PrecioValue(amount);
+		this.description = description;
+		this.state = state;
+		this.userId = userID;
+	}
 
-    public Property(UUID id, String name, double amount, String description, String state, UUID userID) throws BusinessRuleValidationException {
-        this.id = id;
-        this.name = name;
-        this.amount = new PrecioValue(amount);
-        this.description = description;
-        this.state = state;
-        this.userId = userID;
-    }
+	public Property(String name, double amount, String description, String state, UUID userID)
+			throws BusinessRuleValidationException {
+		this.name = name;
+		this.amount = new PrecioValue(amount);
+		this.description = description;
+		this.userId = userID;
+		this.state = state;
+	}
 
-    public Property(String name, double amount, String description, String state, UUID userID) throws BusinessRuleValidationException {
-        this.name = name;
-        this.amount = new PrecioValue(amount);
-        this.description = description;
-        this.userId = userID;
-        this.state = state;
-    }
-
-    @Override
-    public UUID getId() {
-        return id;
-    }
+	@Override
+	public UUID getId() {
+		return id;
+	}
 
 }

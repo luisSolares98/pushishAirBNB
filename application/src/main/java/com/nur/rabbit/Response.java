@@ -1,6 +1,5 @@
 package com.nur.rabbit;
 
-
 import lombok.*;
 
 @Data
@@ -10,10 +9,8 @@ import lombok.*;
 @ToString
 public class Response {
 
-    private Pattern pattern;
+	private Pattern pattern;
 
-    private CustomMessage data;
-
+	private CustomMessage data;
 
 }
-

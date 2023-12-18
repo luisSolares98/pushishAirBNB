@@ -11,12 +11,12 @@ import lombok.ToString;
 @ToString
 public class PropertyCharacteristicDto {
 
-    private String id;
+	private String id;
 
-    private String propertyId;
+	private String propertyId;
 
-    private String characteristicId;
+	private String characteristicId;
 
-    private String name;
+	private String name;
 
 }

@@ -12,22 +12,25 @@ import java.util.Date;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler
-    protected ResponseEntity<ErrorResponse> handleException(InvalidDataException ex) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return buildResponseEntity(status, new RuntimeException(ex.getMessage()), ex.metodo);
-    }
-    @ExceptionHandler
-    protected ResponseEntity<ErrorResponse> handleException(BusinessRuleValidationException ex) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        return buildResponseEntity(status, new RuntimeException(ex.getMessage()), ex.getClass().getName());
-    }
-    private ResponseEntity<ErrorResponse> buildResponseEntity(HttpStatus  status, Exception exc, String metodo) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(exc.getMessage());
-        errorResponse.setStatus(status.value());
-        errorResponse.setTimestamp(new Date());
-        errorResponse.setMetodo(metodo);
-        return new ResponseEntity<>(errorResponse, status);
-    }
+	@ExceptionHandler
+	protected ResponseEntity<ErrorResponse> handleException(InvalidDataException ex) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		return buildResponseEntity(status, new RuntimeException(ex.getMessage()), ex.metodo);
+	}
+
+	@ExceptionHandler
+	protected ResponseEntity<ErrorResponse> handleException(BusinessRuleValidationException ex) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		return buildResponseEntity(status, new RuntimeException(ex.getMessage()), ex.getClass().getName());
+	}
+
+	private ResponseEntity<ErrorResponse> buildResponseEntity(HttpStatus status, Exception exc, String metodo) {
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setMessage(exc.getMessage());
+		errorResponse.setStatus(status.value());
+		errorResponse.setTimestamp(new Date());
+		errorResponse.setMetodo(metodo);
+		return new ResponseEntity<>(errorResponse, status);
+	}
+
 }
