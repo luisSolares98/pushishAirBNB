@@ -1,18 +1,21 @@
 package com.nur.command.characteristicProperty.list;
 
-import an.awesome.pipelinr.Command;
 import com.nur.core.BusinessRuleValidationException;
 import com.nur.dtos.PropertyCharacteristicDto;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Characteristic;
 import com.nur.model.CharacteristicProperty;
 import com.nur.repositories.CharacteristicPropertyRepository;
 import com.nur.repositories.CharacteristicRepository;
 import com.nur.utils.CharacteristicPropertyMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
+
+import an.awesome.pipelinr.Command;
 
 @Component
 public class GetCharacteristicByPropertyHandler
@@ -36,23 +39,19 @@ public class GetCharacteristicByPropertyHandler
       List<PropertyCharacteristicDto> resul = properties.stream().filter(c -> c.getPropertyId().equals(UUID.fromString(command.property))).map(CharacteristicPropertyMapper::from).toList();
 
       List<Characteristic> list = this.tipo.getAll();
-      for (int i = 0; i < resul.size(); i++) {
-        PropertyCharacteristicDto element = resul.get(i);
+      for (PropertyCharacteristicDto element : resul) {
         String name = "";
-        for (int j = 0; j < list.size(); j++) {
-          Characteristic characteristic = list.get(j);
-          if(characteristic.getId().equals(UUID.fromString(element.getCharacteristicId()))) {
+        for (Characteristic characteristic : list) {
+          if (characteristic.getId().equals(UUID.fromString(element.getCharacteristicId()))) {
             name = characteristic.getName();
           }
         }
-        // String name = list.stream().filter(c -> c.getId().equals(UUID.fromString(element.getCharacteristicId()))).toList().get(0).getName();
-        resul.get(i).setName(name);
+        element.setName(name);
       }
 
       return resul;
     } catch (BusinessRuleValidationException e) {
-      e.printStackTrace();
-      return null;
+      throw new InvalidDataException(e.getMessage());
     }
   }
 }

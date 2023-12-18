@@ -1,11 +1,14 @@
 package com.nur.utils;
 
 import com.nur.dtos.PropertyCharacteristicDto;
-import com.nur.dtos.PropertyDto;
 import com.nur.model.CharacteristicProperty;
-import com.nur.model.Property;
 
 public class CharacteristicPropertyMapper {
+
+    private CharacteristicPropertyMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static PropertyCharacteristicDto from(CharacteristicProperty property) {
         if (property == null) return PropertyCharacteristicDto.builder().build();
         return PropertyCharacteristicDto.builder()

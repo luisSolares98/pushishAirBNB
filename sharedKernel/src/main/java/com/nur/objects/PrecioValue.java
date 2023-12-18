@@ -3,24 +3,19 @@ package com.nur.objects;
 
 import com.nur.core.BusinessRuleValidationException;
 import com.nur.core.ValueObject;
+import com.nur.rules.NotNegativeNumber;
 
 
 public class PrecioValue extends ValueObject {
-    private final double Value ;
+    private final double value ;
     public PrecioValue(double value) throws BusinessRuleValidationException {
-        if (value < 0)
-        {
-            throw new BusinessRuleValidationException("Price value cannot be negative");
-        }
-        Value = value;
+        checkRule(new NotNegativeNumber(value));
+        this.value = value;
     }
 
     public double getValue() {
-        return Value;
+        return value;
     }
 
-    public static PrecioValue fromDouble(double value) throws BusinessRuleValidationException {
-        return new PrecioValue(value);
-    }
 
 }

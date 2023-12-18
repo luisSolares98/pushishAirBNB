@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.UUID;
 
 @Getter
 @Builder
@@ -13,15 +12,15 @@ import java.util.UUID;
 @ToString
 public class PropertyDto {
 
-  public String id;
+  private String id;
 
-  public String name;
+  private String name;
 
-  public String description;
+  private String description;
 
-  public double amount;
+  private double amount;
 
-  public String state;
+  private String state;
 
-  public String userId;
+  private String userId;
 }

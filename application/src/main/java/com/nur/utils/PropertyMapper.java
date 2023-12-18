@@ -3,9 +3,11 @@ package com.nur.utils;
 import com.nur.dtos.PropertyDto;
 import com.nur.model.Property;
 
-import java.util.UUID;
-
 public class PropertyMapper {
+
+    private PropertyMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static PropertyDto from(Property property) {
         if (property == null) return PropertyDto.builder().build();

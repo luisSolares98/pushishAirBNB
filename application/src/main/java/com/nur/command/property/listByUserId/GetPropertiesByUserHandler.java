@@ -27,8 +27,7 @@ public class GetPropertiesByUserHandler
       List<Property> properties = this.propiedadRepository.getAll();
       return properties.stream().filter(c -> c.getUserId().equals(UUID.fromString(command.userId))).map(PropertyMapper::from).toList();
     } catch (BusinessRuleValidationException e) {
-      e.printStackTrace();
-      return null;
+      throw new RuntimeException(e.getMessage());
     }
   }
 }

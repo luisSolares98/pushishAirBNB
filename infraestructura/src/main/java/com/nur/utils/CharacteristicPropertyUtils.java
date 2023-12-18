@@ -1,8 +1,6 @@
 package com.nur.utils;
 
 import com.nur.core.BusinessRuleValidationException;
-import com.nur.model.Characteristic;
-import com.nur.model.CharacteristicJpaModel;
 import com.nur.model.CharacteristicProperty;
 import com.nur.model.CharacteristicPropertyJpaModel;
 

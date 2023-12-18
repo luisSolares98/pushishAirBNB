@@ -1,5 +1,6 @@
 package com.nur.repositories.propiedad;
 
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.PropertyJpaModel;
 import com.nur.utils.PropertyUtils;
 import com.nur.core.BusinessRuleValidationException;
@@ -37,9 +38,7 @@ public class PropertyJpaRepository implements PropertyRepository {
     public UUID deletePropertyById(UUID id) throws BusinessRuleValidationException {
 
         PropertyJpaModel propertyJpaModel = propertyCrudRepository.findById(id).orElse(null);
-        if (Objects.isNull(propertyJpaModel)) {
-            throw new BusinessRuleValidationException("not find");
-        }
+        if(Objects.isNull(propertyJpaModel)) throw new InvalidDataException("jpaModel is null");
         propertyJpaModel.setState("Disable");
         propertyCrudRepository.save(propertyJpaModel);
         return id;

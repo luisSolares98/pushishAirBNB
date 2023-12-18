@@ -26,8 +26,7 @@ public class GetPropertiesHandler
       List<Property> properties = this.propiedadRepository.getAll();
       return properties.stream().map(PropertyMapper::from).toList();
     } catch (BusinessRuleValidationException e) {
-      e.printStackTrace();
-      return null;
+      throw new RuntimeException(e.getMessage());
     }
   }
 }

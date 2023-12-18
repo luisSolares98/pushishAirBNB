@@ -1,8 +1,8 @@
 package com.nur.command.characteristicProperty.create;
 
-import an.awesome.pipelinr.Command;
 import com.nur.dtos.PropertyCharacteristicDto;
-import com.nur.dtos.PropertyDto;
+
+import an.awesome.pipelinr.Command;
 
 public class CreateCharacteristicPropertyCommand implements Command<PropertyCharacteristicDto> {
 

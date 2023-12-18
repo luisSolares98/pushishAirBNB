@@ -1,7 +1,5 @@
 package com.nur.model;
 
-
-import com.nur.core.AggregateRoot;
 import com.nur.core.BusinessRuleValidationException;
 import com.nur.core.Entity;
 import com.nur.objects.PrecioValue;

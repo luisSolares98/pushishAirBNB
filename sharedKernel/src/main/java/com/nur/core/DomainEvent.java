@@ -2,14 +2,16 @@ package com.nur.core;
 
 import java.util.Date;
 import java.util.UUID;
+import lombok.Getter;
 
+@Getter
 public abstract class DomainEvent {
 
-  private Date ocurredOn;
-  private UUID id;
+  private final Date occurredOn;
+  private final UUID id;
 
-  protected DomainEvent(Date ocurredOn) {
+  protected DomainEvent(Date occurredOn) {
     this.id = UUID.randomUUID();
-    this.ocurredOn = ocurredOn;
+    this.occurredOn = occurredOn;
   }
 }

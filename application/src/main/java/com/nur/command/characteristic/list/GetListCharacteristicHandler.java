@@ -3,6 +3,7 @@ package com.nur.command.characteristic.list;
 import an.awesome.pipelinr.Command;
 import com.nur.dtos.CharacteristicDto;
 import com.nur.core.BusinessRuleValidationException;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Characteristic;
 import org.springframework.stereotype.Component;
 import com.nur.repositories.CharacteristicRepository;
@@ -26,8 +27,7 @@ public class GetListCharacteristicHandler
       List<Characteristic> list = this.tipo.getAll();
       return list.stream().map(CharacteristicMapper::from).toList();
     } catch (BusinessRuleValidationException e) {
-      e.printStackTrace();
-      return null;
+      throw new InvalidDataException(e.getMessage());
     }
   }
 }

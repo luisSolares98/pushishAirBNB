@@ -5,16 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.UUID;
-
 @Getter
 @Builder
 @Setter
 @ToString
 public class CharacteristicDto {
 
-  public String id;
+  private String id;
 
-  public String name;
+  private String name;
 
 }

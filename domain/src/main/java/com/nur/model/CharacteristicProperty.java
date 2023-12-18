@@ -2,7 +2,7 @@ package com.nur.model;
 
 import com.nur.core.AggregateRoot;
 import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.UUID;
 @Getter

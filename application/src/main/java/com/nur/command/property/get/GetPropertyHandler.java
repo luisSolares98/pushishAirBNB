@@ -1,15 +1,16 @@
 package com.nur.command.property.get;
 
-import an.awesome.pipelinr.Command;
-import com.nur.dtos.PropertyDto;
 import com.nur.core.BusinessRuleValidationException;
+import com.nur.dtos.PropertyDto;
 import com.nur.model.Property;
-import org.springframework.stereotype.Component;
 import com.nur.repositories.PropertyRepository;
 import com.nur.utils.PropertyMapper;
 
-import java.util.List;
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
+
+import an.awesome.pipelinr.Command;
 
 @Component
 public class GetPropertyHandler

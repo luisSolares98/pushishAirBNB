@@ -1,9 +1,8 @@
 package com.nur.command.property.get;
 
-import an.awesome.pipelinr.Command;
 import com.nur.dtos.PropertyDto;
 
-import java.util.List;
+import an.awesome.pipelinr.Command;
 
 public class GetPropertyQuery implements Command<PropertyDto> {
 

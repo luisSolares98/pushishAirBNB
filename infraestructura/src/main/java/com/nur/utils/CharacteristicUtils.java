@@ -1,7 +1,6 @@
 package com.nur.utils;
 
 import com.nur.model.CharacteristicJpaModel;
-import com.nur.core.BusinessRuleValidationException;
 import com.nur.model.Characteristic;
 
 import java.util.Collections;
@@ -23,8 +22,7 @@ public class CharacteristicUtils {
         return tipo.stream().map(CharacteristicUtils::tipoToJpaEntity).toList();
     }
 
-    public static Characteristic jpaModelToTipoPropiedad(CharacteristicJpaModel jpaModel)
-            throws BusinessRuleValidationException {
+    public static Characteristic jpaModelToTipoPropiedad(CharacteristicJpaModel jpaModel) {
         return new Characteristic(
                 jpaModel.getId(),
                 jpaModel.getName()
