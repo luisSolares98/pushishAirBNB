@@ -3,7 +3,7 @@ services:
     build:
       context: .
     container_name: propertyNur-spring
-    image: luissolares98/msreserva:latest
+    image: luissolares98/mspublish:latest
     ports:
       - 9092:8080
     depends_on:
