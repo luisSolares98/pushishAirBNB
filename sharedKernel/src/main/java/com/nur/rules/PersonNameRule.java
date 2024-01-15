@@ -1,10 +1,10 @@
 package com.nur.rules;
 
-import com.nur.core.BusinessRule;
+import com.nur.core.BussinessRule;
 
-public class PersonNameRule implements BusinessRule {
+public class PersonNameRule implements BussinessRule {
 
-	private static final int MAX_LENGHT = 500;
+	private static final int MAX_LENGHT = 50;
 
 	private final String name;
 

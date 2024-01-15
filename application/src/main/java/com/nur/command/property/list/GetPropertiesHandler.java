@@ -2,7 +2,8 @@ package com.nur.command.property.list;
 
 import an.awesome.pipelinr.Command;
 import com.nur.dtos.PropertyDto;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Property;
 import org.springframework.stereotype.Component;
 import com.nur.repositories.PropertyRepository;
@@ -25,8 +26,8 @@ public class GetPropertiesHandler implements Command.Handler<GetPropertiesQuery,
 			List<Property> properties = this.propiedadRepository.getAll();
 			return properties.stream().map(PropertyMapper::from).toList();
 		}
-		catch (BusinessRuleValidationException e) {
-			throw new RuntimeException(e.getMessage());
+		catch (Exception e) {
+			throw new InvalidDataException(e.getMessage());
 		}
 	}
 

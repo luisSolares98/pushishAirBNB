@@ -1,8 +1,8 @@
 package com.nur.rules;
 
-import com.nur.core.BusinessRule;
+import com.nur.core.BussinessRule;
 
-public class NotNullRule implements BusinessRule {
+public class NotNullRule implements BussinessRule {
 
 	private final Object object;
 

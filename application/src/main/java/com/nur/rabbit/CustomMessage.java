@@ -1,17 +1,14 @@
 package com.nur.rabbit;
 
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Data
+import lombok.*;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter
 public class CustomMessage {
 
 	private UUID id;

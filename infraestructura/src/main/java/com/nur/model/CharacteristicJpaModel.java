@@ -8,6 +8,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "characteristic")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CharacteristicJpaModel {
 
 	@Id

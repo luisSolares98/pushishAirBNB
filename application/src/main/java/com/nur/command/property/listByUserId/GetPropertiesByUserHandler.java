@@ -1,8 +1,9 @@
 package com.nur.command.property.listByUserId;
 
 import an.awesome.pipelinr.Command;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.dtos.PropertyDto;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Property;
 import com.nur.repositories.PropertyRepository;
 import com.nur.utils.PropertyMapper;
@@ -27,8 +28,8 @@ public class GetPropertiesByUserHandler implements Command.Handler<GetProperties
 			return properties.stream().filter(c -> c.getUserId().equals(UUID.fromString(command.userId)))
 					.map(PropertyMapper::from).toList();
 		}
-		catch (BusinessRuleValidationException e) {
-			throw new RuntimeException(e.getMessage());
+		catch (Exception e) {
+			throw new InvalidDataException(e.getMessage());
 		}
 	}
 

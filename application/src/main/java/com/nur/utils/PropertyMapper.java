@@ -5,15 +5,11 @@ import com.nur.model.Property;
 
 public class PropertyMapper {
 
-	private PropertyMapper() {
-		throw new IllegalStateException("Utility class");
-	}
-
 	public static PropertyDto from(Property property) {
 		if (property == null)
 			return PropertyDto.builder().build();
 		return PropertyDto.builder().id(property.getId().toString()).name(property.getName())
-				.amount(property.getAmount().getValue()).description(property.getDescription())
+				.amount(property.getAmount()).description(property.getDescription())
 				.state(property.getState()).userId(property.getUserId().toString()).build();
 	}
 

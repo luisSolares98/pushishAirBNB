@@ -1,8 +1,8 @@
 package com.nur.rules;
 
-import com.nur.core.BusinessRule;
+import com.nur.core.BussinessRule;
 
-public class StringNotNullOrEmptyRule implements BusinessRule {
+public class StringNotNullOrEmptyRule implements BussinessRule {
 
 	private final String value;
 
@@ -12,12 +12,12 @@ public class StringNotNullOrEmptyRule implements BusinessRule {
 
 	@Override
 	public boolean isValid() {
-		return value != null && !value.isEmpty();
+		return !value.isEmpty();
 	}
 
 	@Override
 	public String getMessage() {
-		return "String can not be null";
+		return "String can not be empty";
 	}
 
 }

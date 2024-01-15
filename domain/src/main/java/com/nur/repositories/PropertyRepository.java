@@ -1,6 +1,6 @@
 package com.nur.repositories;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.model.Property;
 
 import java.util.List;
@@ -10,10 +10,10 @@ public interface PropertyRepository {
 
 	UUID update(Property property);
 
-	Property findPropertyById(UUID id) throws BusinessRuleValidationException;
+	Property findPropertyById(UUID id) throws BussinessRuleValidationException;
 
-	UUID deletePropertyById(UUID id) throws BusinessRuleValidationException;
+	UUID deletePropertyById(UUID id) throws BussinessRuleValidationException;
 
-	List<Property> getAll() throws BusinessRuleValidationException;
+	List<Property> getAll() throws BussinessRuleValidationException;
 
 }

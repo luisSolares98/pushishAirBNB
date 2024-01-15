@@ -18,28 +18,11 @@ public abstract class Entity {
 		domainEvents = new ArrayList<>();
 	}
 
-	public void addDomainEvent(DomainEvent event) {
-		domainEvents.add(event);
+	public void addDomainEvents(DomainEvent event) {
+		this.domainEvents.add(event);
 	}
 
-	public void clearDomainEvents() {
-		domainEvents.clear();
+	public void setKey(UUID key) {
+		this.id = key;
 	}
-
-	protected void checkRule(BusinessRule rule) throws BusinessRuleValidationException {
-		if (rule == null)
-			throw new IllegalArgumentException("Rule cannot be null");
-
-		if (!rule.isValid())
-			throw new BusinessRuleValidationException(rule);
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public List<DomainEvent> getDomainEvents() {
-		return new ArrayList<>(domainEvents);
-	}
-
 }

@@ -1,6 +1,6 @@
 package com.nur.exceptions;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,7 +19,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler
-	protected ResponseEntity<ErrorResponse> handleException(BusinessRuleValidationException ex) {
+	protected ResponseEntity<ErrorResponse> handleException(BussinessRuleValidationException ex) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		return buildResponseEntity(status, new RuntimeException(ex.getMessage()), ex.getClass().getName());
 	}

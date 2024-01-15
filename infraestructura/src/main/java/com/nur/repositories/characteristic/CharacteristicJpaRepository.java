@@ -2,7 +2,7 @@ package com.nur.repositories.characteristic;
 
 import com.nur.model.CharacteristicJpaModel;
 import com.nur.utils.CharacteristicUtils;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.model.Characteristic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -26,7 +26,7 @@ public class CharacteristicJpaRepository implements CharacteristicRepository {
 	}
 
 	@Override
-	public List<Characteristic> getAll() throws BusinessRuleValidationException {
+	public List<Characteristic> getAll() throws BussinessRuleValidationException {
 		List<CharacteristicJpaModel> jpaModels = Streamable.of(crudRepository.findAll()).toList();
 		List<Characteristic> tipos = new ArrayList<>();
 		for (CharacteristicJpaModel jpaModel : jpaModels) {

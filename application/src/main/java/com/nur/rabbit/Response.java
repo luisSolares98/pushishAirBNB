@@ -2,8 +2,8 @@ package com.nur.rabbit;
 
 import lombok.*;
 
-@Data
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

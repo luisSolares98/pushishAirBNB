@@ -2,7 +2,8 @@ package com.nur.command.property.create;
 
 import an.awesome.pipelinr.Command;
 import com.nur.dtos.PropertyDto;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.factories.property.PropertyFactory;
 import com.nur.model.Property;
 import com.nur.rabbit.Config;
@@ -54,8 +55,8 @@ public class CreatePropertyHandler implements Command.Handler<CreatePropertyComm
 			template.convertAndSend(Config.EXCHANGE, response);
 			return PropertyMapper.from(property);
 		}
-		catch (BusinessRuleValidationException e) {
-			return null;
+		catch (Exception e) {
+			throw new InvalidDataException(e.getMessage());
 		}
 	}
 

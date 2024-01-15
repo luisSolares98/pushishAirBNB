@@ -1,8 +1,9 @@
 package com.nur.command.characteristicProperty.create;
 
 import an.awesome.pipelinr.Command;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.dtos.PropertyCharacteristicDto;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.factories.characteristicProperty.CharacteristicPropertyFactory;
 import com.nur.model.CharacteristicProperty;
 import com.nur.repositories.CharacteristicPropertyRepository;
@@ -37,8 +38,8 @@ public class CreateCharacteristicPropertyHandler
 			repository.update(property);
 			return CharacteristicPropertyMapper.from(property);
 		}
-		catch (BusinessRuleValidationException e) {
-			return null;
+		catch (Exception e) {
+			throw new InvalidDataException(e.getMessage());
 		}
 	}
 

@@ -1,17 +1,19 @@
 package com.nur.utils;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.model.CharacteristicProperty;
 import com.nur.model.CharacteristicPropertyJpaModel;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class CharacteristicPropertyUtils {
 
 	public static CharacteristicPropertyJpaModel ToJpaEntity(CharacteristicProperty property) {
-		if (property == null)
-			return null;
+		if (Objects.isNull(property))
+			throw new InvalidDataException("entity is null");
 		CharacteristicPropertyJpaModel characteristicJpaModel = new CharacteristicPropertyJpaModel();
 		characteristicJpaModel.setId(property.getId());
 		characteristicJpaModel.setCharacteristicId(property.getCharacteristicId());
@@ -26,7 +28,9 @@ public class CharacteristicPropertyUtils {
 	}
 
 	public static CharacteristicProperty jpaModelToCharacteristicProperty(CharacteristicPropertyJpaModel jpaModel)
-			throws BusinessRuleValidationException {
+			throws BussinessRuleValidationException {
+		if (Objects.isNull(jpaModel))
+			throw new InvalidDataException("jpaModel is null");
 		return new CharacteristicProperty(jpaModel.getId(), jpaModel.getCharacteristicId(), jpaModel.getPropertyId());
 	}
 

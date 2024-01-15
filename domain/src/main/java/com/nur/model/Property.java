@@ -1,13 +1,15 @@
 package com.nur.model;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.core.Entity;
 import com.nur.objects.PrecioValue;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Getter
+@ToString
 public class Property extends Entity {
 
 	private String name;
@@ -21,7 +23,7 @@ public class Property extends Entity {
 	private UUID userId;
 
 	public Property(UUID id, String name, double amount, String description, String state, UUID userID)
-			throws BusinessRuleValidationException {
+			throws BussinessRuleValidationException {
 		this.id = id;
 		this.name = name;
 		this.amount = new PrecioValue(amount);
@@ -31,7 +33,7 @@ public class Property extends Entity {
 	}
 
 	public Property(String name, double amount, String description, String state, UUID userID)
-			throws BusinessRuleValidationException {
+			throws BussinessRuleValidationException {
 		this.name = name;
 		this.amount = new PrecioValue(amount);
 		this.description = description;
@@ -39,9 +41,8 @@ public class Property extends Entity {
 		this.state = state;
 	}
 
-	@Override
-	public UUID getId() {
-		return id;
-	}
 
+	public double getAmount() {
+		return amount.getValue();
+	}
 }

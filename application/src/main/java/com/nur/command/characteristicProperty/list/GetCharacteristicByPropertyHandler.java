@@ -1,6 +1,6 @@
 package com.nur.command.characteristicProperty.list;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.dtos.PropertyCharacteristicDto;
 import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Characteristic;
@@ -23,11 +23,11 @@ public class GetCharacteristicByPropertyHandler
 
 	private final CharacteristicPropertyRepository repository;
 
-	@Autowired
 	private CharacteristicRepository tipo;
-
-	public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository) {
+	@Autowired
+	public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository, CharacteristicRepository characteristicRepository) {
 		this.repository = repository;
+		this.tipo = characteristicRepository;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class GetCharacteristicByPropertyHandler
 
 			return resul;
 		}
-		catch (BusinessRuleValidationException e) {
+		catch (Exception e) {
 			throw new InvalidDataException(e.getMessage());
 		}
 	}

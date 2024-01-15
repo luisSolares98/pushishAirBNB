@@ -1,6 +1,6 @@
 package com.nur.command.property.get;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.dtos.PropertyDto;
 import com.nur.exceptions.InvalidDataException;
 import com.nur.model.Property;
@@ -28,7 +28,7 @@ public class GetPropertyHandler implements Command.Handler<GetPropertyQuery, Pro
 			Property property = propiedadRepository.findPropertyById(UUID.fromString(command.id));
 			return PropertyMapper.from(property);
 		}
-		catch (BusinessRuleValidationException e) {
+		catch (Exception e) {
 			throw new InvalidDataException(e.getMessage());
 		}
 	}

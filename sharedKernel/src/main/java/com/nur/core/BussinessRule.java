@@ -1,6 +1,6 @@
 package com.nur.core;
 
-public interface BusinessRule {
+public interface BussinessRule {
 
 	boolean isValid();
 

@@ -1,6 +1,6 @@
 package com.nur.repositories.characteristicProperty;
 
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.model.CharacteristicProperty;
 import com.nur.model.CharacteristicPropertyJpaModel;
 import com.nur.repositories.CharacteristicPropertyRepository;
@@ -26,7 +26,7 @@ public class CharacteristicPropertyJpaRepository implements CharacteristicProper
 	}
 
 	@Override
-	public List<CharacteristicProperty> getAllByProperty() throws BusinessRuleValidationException {
+	public List<CharacteristicProperty> getAllByProperty() throws BussinessRuleValidationException {
 		List<CharacteristicPropertyJpaModel> jpaModels = Streamable.of(crudRepository.findAll()).toList();
 		List<CharacteristicProperty> properties = new ArrayList<>();
 		for (CharacteristicPropertyJpaModel jpaModel : jpaModels) {

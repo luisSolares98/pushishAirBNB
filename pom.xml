@@ -26,6 +26,7 @@
 		<lombok.version>1.18.22</lombok.version>
 		<sonar.organization>luissolares98</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.exclusions>com/nur/dtos/*, com/nur/exceptions/*, com/nur/Main.class, com/nur/rabbit/*, com/nur/controller/RabbitController.class</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -118,6 +119,8 @@
 						<exclude>com/nur/dtos/*</exclude>
 						<exclude>com/nur/exceptions/*</exclude>
 						<exclude>com/nur/Main.class</exclude>
+						<exclude>com/nur/rabbit/*</exclude>
+						<exclude>com/nur/controller/RabbitController.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

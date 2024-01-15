@@ -1,8 +1,8 @@
 package com.nur.rules;
 
-import com.nur.core.BusinessRule;
+import com.nur.core.BussinessRule;
 
-public class NotNegativeNumber implements BusinessRule {
+public class NotNegativeNumber implements BussinessRule {
 
 	private final Double amount;
 
@@ -17,7 +17,7 @@ public class NotNegativeNumber implements BusinessRule {
 
 	@Override
 	public String getMessage() {
-		return "Price value cannot be negative";
+		return "Price value cannot be negative or zero";
 	}
 
 }

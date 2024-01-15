@@ -2,7 +2,8 @@ package com.nur.command.characteristic.create;
 
 import an.awesome.pipelinr.Command;
 import com.nur.dtos.CharacteristicDto;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
+import com.nur.exceptions.InvalidDataException;
 import com.nur.factories.characteristic.CharacteristicFactory;
 import com.nur.model.Characteristic;
 import org.springframework.stereotype.Component;
@@ -31,8 +32,8 @@ public class CreateCharacteristicHandler implements Command.Handler<CreateCharac
 			characteristicRepository.update(characteristic);
 			return CharacteristicMapper.from(characteristic);
 		}
-		catch (BusinessRuleValidationException e) {
-			return null;
+		catch (Exception e) {
+			throw new InvalidDataException(e.getMessage());
 		}
 	}
 

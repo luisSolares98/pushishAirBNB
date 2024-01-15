@@ -1,7 +1,7 @@
 package com.nur.utils;
 
 import com.nur.annotations.Generated;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.exceptions.InvalidDataException;
 import com.nur.model.PropertyJpaModel;
 import com.nur.model.Property;
@@ -15,14 +15,14 @@ public class PropertyUtils {
 
 	public static PropertyJpaModel propiedadToJpaEntity(Property propiedad) {
 		if (Objects.isNull(propiedad))
-			throw new InvalidDataException("property is null");
+			throw new InvalidDataException("entity is null");
 		PropertyJpaModel propertyJpaModel = new PropertyJpaModel();
 		propertyJpaModel.setId(propiedad.getId());
 		propertyJpaModel.setName(propiedad.getName());
 		propertyJpaModel.setDescription(propiedad.getDescription());
 		propertyJpaModel.setUserID(propiedad.getUserId());
 		propertyJpaModel.setState(propiedad.getState());
-		propertyJpaModel.setAmount(propiedad.getAmount().getValue());
+		propertyJpaModel.setAmount(propiedad.getAmount());
 		return propertyJpaModel;
 	}
 
@@ -32,7 +32,7 @@ public class PropertyUtils {
 		return propiedades.stream().map(PropertyUtils::propiedadToJpaEntity).toList();
 	}
 
-	public static Property jpaModelToPropiedad(PropertyJpaModel jpaModel) throws BusinessRuleValidationException {
+	public static Property jpaModelToPropiedad(PropertyJpaModel jpaModel) throws BussinessRuleValidationException {
 		if (Objects.isNull(jpaModel))
 			throw new InvalidDataException("jpaModel is null");
 

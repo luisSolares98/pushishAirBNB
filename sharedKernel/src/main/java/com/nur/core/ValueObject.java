@@ -1,13 +1,14 @@
 package com.nur.core;
+import java.util.Objects;
 
 public abstract class ValueObject {
 
-	protected void checkRule(BusinessRule rule) throws BusinessRuleValidationException {
-		if (rule == null)
-			throw new IllegalArgumentException("Rule can not be null");
+	public void checkRule(BussinessRule rule) throws BussinessRuleValidationException {
+		if (Objects.isNull(rule))
+			throw new IllegalArgumentException("Rule cannot be null");
 
 		if (!rule.isValid())
-			throw new BusinessRuleValidationException(rule);
+			throw new BussinessRuleValidationException(rule);
 	}
 
 }

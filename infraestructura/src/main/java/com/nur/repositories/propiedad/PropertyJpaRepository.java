@@ -3,7 +3,7 @@ package com.nur.repositories.propiedad;
 import com.nur.exceptions.InvalidDataException;
 import com.nur.model.PropertyJpaModel;
 import com.nur.utils.PropertyUtils;
-import com.nur.core.BusinessRuleValidationException;
+import com.nur.core.BussinessRuleValidationException;
 import com.nur.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -28,14 +28,14 @@ public class PropertyJpaRepository implements PropertyRepository {
 	}
 
 	@Override
-	public Property findPropertyById(UUID id) throws BusinessRuleValidationException {
+	public Property findPropertyById(UUID id) throws BussinessRuleValidationException {
 
 		return PropertyUtils.jpaModelToPropiedad(propertyCrudRepository.findById(id).orElse(null));
 
 	}
 
 	@Override
-	public UUID deletePropertyById(UUID id) throws BusinessRuleValidationException {
+	public UUID deletePropertyById(UUID id) throws BussinessRuleValidationException {
 
 		PropertyJpaModel propertyJpaModel = propertyCrudRepository.findById(id).orElse(null);
 		if (Objects.isNull(propertyJpaModel))
@@ -46,7 +46,7 @@ public class PropertyJpaRepository implements PropertyRepository {
 	}
 
 	@Override
-	public List<Property> getAll() throws BusinessRuleValidationException {
+	public List<Property> getAll() throws BussinessRuleValidationException {
 		List<PropertyJpaModel> jpaModels = Streamable.of(propertyCrudRepository.findAll()).toList();
 		List<Property> propiedads = new ArrayList<>();
 		for (PropertyJpaModel jpaModel : jpaModels) {
