@@ -12,9 +12,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/msproperty"
-    username: postgres
-    password: root
+    url: "jdbc:postgresql://db-postgresql-nyc3-65217-do-user-15342906-0.c.db.ondigitalocean.com:25060/msproperty"
+    username: doadmin
+    password: AVNS_pdtP2atPlaIGHm23GUZ
 
   jpa:
     show-sql: true
