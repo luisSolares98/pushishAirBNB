@@ -29,71 +29,78 @@ import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class PropertyControllerTest {
-    @Mock
-    Pipeline pipeline;
 
-    @Mock
-    PropertyController controller;
+	@Mock
+	Pipeline pipeline;
 
-    @BeforeEach
-    void setUp() {
-        controller = new PropertyController(pipeline);
-    }
+	@Mock
+	PropertyController controller;
 
-    @Test
-    void createProperty() throws ParseException {
-        PropertyDto model = PropertyDtoTest.withDefault();
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        Mockito.when(pipeline.send(any(CreatePropertyCommand.class))).thenReturn(expect);
-        PropertyDto response = controller.createProperty(model);
-        Assertions.assertEquals(response, expect);
-    }
+	@BeforeEach
+	void setUp() {
+		controller = new PropertyController(pipeline);
+	}
 
-    @Test
-    void createCharacteristicProperty() throws ParseException {
-        PropertyCharacteristicDto model = PropertyCharacteristicDtoTest.withDefault();
-        PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
-        Mockito.when(pipeline.send(any(CreateCharacteristicPropertyCommand.class))).thenReturn(expect);
-        PropertyCharacteristicDto response = controller.createCharacteristicProperty(model);
-        Assertions.assertEquals(response, expect);
-    }
+	@Test
+	void createProperty() throws ParseException {
+		PropertyDto model = PropertyDtoTest.withDefault();
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		Mockito.when(pipeline.send(any(CreatePropertyCommand.class))).thenReturn(expect);
+		PropertyDto response = controller.createProperty(model);
+		Assertions.assertEquals(response, expect);
+	}
 
-    @Test
-    void getAll() throws ParseException {
-        List<PropertyDto> list = new ArrayList<>();
-        list.add(PropertyDtoTest.withDefaultResponse());
-        Mockito.when(pipeline.send(any(GetPropertiesQuery.class))).thenReturn(list);
-        List<PropertyDto> response = controller.getListAllProperty();
-        Assertions.assertEquals(response, list);
-    }
-    @Test
-    void getById() throws ParseException {
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        Mockito.when(pipeline.send(any(GetPropertyQuery.class))).thenReturn(expect);
-        PropertyDto response = controller.getProperty("effa368e-2f33-49c7-94e4-a4dfb3be2c20");
-        Assertions.assertEquals(response, expect);
-    }
-    @Test
-    void getAllByUserId() throws ParseException {
-        List<PropertyDto> list = new ArrayList<>();
-        list.add(PropertyDtoTest.withDefaultResponse());
-        Mockito.when(pipeline.send(any(GetPropertiesByUserQuery.class))).thenReturn(list);
-        List<PropertyDto> response = controller.getListAllPropertyByUserId("effa368e-2f33-49c7-94e4-a4dfb3be2c10");
-        Assertions.assertEquals(response, list);
-    }
-    @Test
-    void getCharacteristicByPropertyId() throws ParseException {
-        List<PropertyCharacteristicDto> list = new ArrayList<>();
-        list.add(PropertyCharacteristicDtoTest.withDefaultResponse());
-        Mockito.when(pipeline.send(any(GetCharacteristicByPropertyQuery.class))).thenReturn(list);
-        List<PropertyCharacteristicDto> response = controller.getCharacteristicByPropertyId("effa368e-2f33-49c7-94e4-a4dfb3be2c37");
-        Assertions.assertEquals(response, list);
-    }
-    @Test
-    void DropById() throws ParseException {
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        Mockito.when(pipeline.send(any(DeletePropertyQuery.class))).thenReturn(UUID.fromString(expect.getId()));
-        UUID response = controller.dropProperty("effa368e-2f33-49c7-94e4-a4dfb3be2c20");
-        Assertions.assertEquals(response.toString(), expect.getId());
-    }
+	@Test
+	void createCharacteristicProperty() throws ParseException {
+		PropertyCharacteristicDto model = PropertyCharacteristicDtoTest.withDefault();
+		PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
+		Mockito.when(pipeline.send(any(CreateCharacteristicPropertyCommand.class))).thenReturn(expect);
+		PropertyCharacteristicDto response = controller.createCharacteristicProperty(model);
+		Assertions.assertEquals(response, expect);
+	}
+
+	@Test
+	void getAll() throws ParseException {
+		List<PropertyDto> list = new ArrayList<>();
+		list.add(PropertyDtoTest.withDefaultResponse());
+		Mockito.when(pipeline.send(any(GetPropertiesQuery.class))).thenReturn(list);
+		List<PropertyDto> response = controller.getListAllProperty();
+		Assertions.assertEquals(response, list);
+	}
+
+	@Test
+	void getById() throws ParseException {
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		Mockito.when(pipeline.send(any(GetPropertyQuery.class))).thenReturn(expect);
+		PropertyDto response = controller.getProperty("effa368e-2f33-49c7-94e4-a4dfb3be2c20");
+		Assertions.assertEquals(response, expect);
+	}
+
+	@Test
+	void getAllByUserId() throws ParseException {
+		List<PropertyDto> list = new ArrayList<>();
+		list.add(PropertyDtoTest.withDefaultResponse());
+		Mockito.when(pipeline.send(any(GetPropertiesByUserQuery.class))).thenReturn(list);
+		List<PropertyDto> response = controller.getListAllPropertyByUserId("effa368e-2f33-49c7-94e4-a4dfb3be2c10");
+		Assertions.assertEquals(response, list);
+	}
+
+	@Test
+	void getCharacteristicByPropertyId() throws ParseException {
+		List<PropertyCharacteristicDto> list = new ArrayList<>();
+		list.add(PropertyCharacteristicDtoTest.withDefaultResponse());
+		Mockito.when(pipeline.send(any(GetCharacteristicByPropertyQuery.class))).thenReturn(list);
+		List<PropertyCharacteristicDto> response = controller
+				.getCharacteristicByPropertyId("effa368e-2f33-49c7-94e4-a4dfb3be2c37");
+		Assertions.assertEquals(response, list);
+	}
+
+	@Test
+	void DropById() throws ParseException {
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		Mockito.when(pipeline.send(any(DeletePropertyQuery.class))).thenReturn(UUID.fromString(expect.getId()));
+		UUID response = controller.dropProperty("effa368e-2f33-49c7-94e4-a4dfb3be2c20");
+		Assertions.assertEquals(response.toString(), expect.getId());
+	}
+
 }

@@ -18,37 +18,38 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @ExtendWith(MockitoExtension.class)
 class CreateCharacteristicPropertyHandlerTest {
 
+	@Mock
+	CharacteristicPropertyRepository propertyRepository;
 
-    @Mock
-    CharacteristicPropertyRepository propertyRepository;
+	@Spy
+	ICharacteristicPropertyFactory factory;
 
-    @Spy
-    ICharacteristicPropertyFactory factory;
+	@Mock
+	CreateCharacteristicPropertyHandler service;
 
-    @Mock
-    CreateCharacteristicPropertyHandler service;
+	@BeforeEach
+	void setUp() {
+		service = new CreateCharacteristicPropertyHandler(propertyRepository);
 
-    @BeforeEach
-    void setUp() {
-        service = new CreateCharacteristicPropertyHandler(propertyRepository);
+	}
 
-    }
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
+		CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(
+				PropertyCharacteristicDtoTest.withDefaultResponse());
+		PropertyCharacteristicDto respuesta = service.handle(command);
+		assertEquals(expect.getPropertyId(), respuesta.getPropertyId());
+	}
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
-        CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(PropertyCharacteristicDtoTest.withDefaultResponse());
-        PropertyCharacteristicDto respuesta = service.handle(command);
-        assertEquals(expect.getPropertyId(), respuesta.getPropertyId());
-    }
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(null);
+		assertThrows(InvalidDataException.class, () -> service.handle(command));
+	}
 
-
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        CreateCharacteristicPropertyCommand command = new CreateCharacteristicPropertyCommand(null);
-        assertThrows(InvalidDataException.class, () -> service.handle(command));
-    }
 }

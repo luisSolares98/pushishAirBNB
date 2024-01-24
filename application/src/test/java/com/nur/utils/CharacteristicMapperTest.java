@@ -21,23 +21,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CharacteristicMapperTest {
-    @Mock
-    CharacteristicMapper mapper;
 
-    @BeforeEach
-    void setUp() {
-        mapper = new CharacteristicMapper();
-    }
-    @Test
-    void from() throws ParseException, BussinessRuleValidationException {
-        CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
-        CharacteristicDto response = CharacteristicMapper.from(CharacteristicFixture.whitDefault());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@Mock
+	CharacteristicMapper mapper;
 
-    @Test
-    void testFromNull() throws ParseException {
-        CharacteristicDto response = CharacteristicMapper.from((Characteristic) null);
-        assertEquals(CharacteristicDto.builder().build().toString(), response.toString());
-    }
+	@BeforeEach
+	void setUp() {
+		mapper = new CharacteristicMapper();
+	}
+
+	@Test
+	void from() throws ParseException, BussinessRuleValidationException {
+		CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
+		CharacteristicDto response = CharacteristicMapper.from(CharacteristicFixture.whitDefault());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void testFromNull() throws ParseException {
+		CharacteristicDto response = CharacteristicMapper.from((Characteristic) null);
+		assertEquals(CharacteristicDto.builder().build().toString(), response.toString());
+	}
+
 }

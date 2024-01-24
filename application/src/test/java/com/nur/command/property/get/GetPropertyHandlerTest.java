@@ -23,33 +23,35 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetPropertyHandlerTest {
-    @Mock
-    PropertyRepository repository;
 
-    @Spy
-    IPropertyFactory factory;
+	@Mock
+	PropertyRepository repository;
 
-    @Mock
-    GetPropertyHandler service;
+	@Spy
+	IPropertyFactory factory;
 
-    @BeforeEach
-    void setUp() {
-        service = new GetPropertyHandler(repository);
-    }
+	@Mock
+	GetPropertyHandler service;
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        when(repository.findPropertyById(any(UUID.class))).thenReturn(PropertyFixture.whitDefault());
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        GetPropertyQuery command = new GetPropertyQuery(PropertyDtoTest.withDefaultResponse().getId());
-        PropertyDto respuesta = service.handle(command);
+	@BeforeEach
+	void setUp() {
+		service = new GetPropertyHandler(repository);
+	}
 
-        assertEquals(expect.getUserId(), respuesta.getUserId());
-    }
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		when(repository.findPropertyById(any(UUID.class))).thenReturn(PropertyFixture.whitDefault());
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		GetPropertyQuery command = new GetPropertyQuery(PropertyDtoTest.withDefaultResponse().getId());
+		PropertyDto respuesta = service.handle(command);
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        GetPropertyQuery command = new GetPropertyQuery(null);
-        assertThrows(InvalidDataException.class, () -> service.handle(command));
-    }
+		assertEquals(expect.getUserId(), respuesta.getUserId());
+	}
+
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		GetPropertyQuery command = new GetPropertyQuery(null);
+		assertThrows(InvalidDataException.class, () -> service.handle(command));
+	}
+
 }

@@ -22,38 +22,38 @@ import static org.mockito.ArgumentMatchers.anyString;
 @ExtendWith(MockitoExtension.class)
 class CreatePropertyHandlerTest {
 
+	@Mock
+	PropertyRepository iProperty;
 
-    @Mock
-    PropertyRepository iProperty;
+	@Spy
+	IPropertyFactory iPropertyFactory;
 
-    @Spy
-    IPropertyFactory iPropertyFactory;
+	@InjectMocks
+	CreatePropertyHandler service;
 
-    @InjectMocks
-    CreatePropertyHandler service;
+	@Mock
+	RabbitTemplate template;
 
-    @Mock
-    RabbitTemplate template;
+	@BeforeEach
+	void setUp() {
+		service = new CreatePropertyHandler(iProperty);
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @BeforeEach
-    void setUp() {
-        service = new CreatePropertyHandler(iProperty);
-        MockitoAnnotations.openMocks(this);
-    }
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		CreatePropertyCommand command = new CreatePropertyCommand(PropertyDtoTest.withDefaultResponse());
+		Mockito.doNothing().when(template).convertAndSend(anyString(), (Object) any());
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        CreatePropertyCommand command = new CreatePropertyCommand(PropertyDtoTest.withDefaultResponse());
-        Mockito.doNothing().when(template).convertAndSend(anyString(), (Object) any());
+		PropertyDto respuesta = service.handle(command);
+		assertEquals(expect.getUserId(), respuesta.getUserId());
+	}
 
-        PropertyDto respuesta = service.handle(command);
-        assertEquals(expect.getUserId(), respuesta.getUserId());
-    }
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		CreatePropertyCommand command = new CreatePropertyCommand(null);
+		assertThrows(InvalidDataException.class, () -> service.handle(command));
+	}
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        CreatePropertyCommand command = new CreatePropertyCommand(null);
-        assertThrows(InvalidDataException.class, () -> service.handle(command));
-    }
 }

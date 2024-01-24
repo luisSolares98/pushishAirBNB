@@ -21,32 +21,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CharacteristicControllerTest {
-    @Mock
-    Pipeline pipeline;
 
-    @Mock
-    CharacteristicController controller;
+	@Mock
+	Pipeline pipeline;
 
-    @BeforeEach
-    void setUp() {
-        controller = new CharacteristicController(pipeline);
-    }
+	@Mock
+	CharacteristicController controller;
 
-    @Test
-    void create() throws ParseException {
-        CharacteristicDto model = CharacteristicDtoTest.withDefault();
-        CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
-        Mockito.when(pipeline.send(any(CreateCharacteristicCommand.class))).thenReturn(expect);
-        CharacteristicDto response = controller.createCharacteristic(model);
-        Assertions.assertEquals(response, expect);
-    }
+	@BeforeEach
+	void setUp() {
+		controller = new CharacteristicController(pipeline);
+	}
 
-    @Test
-    void getAll() throws ParseException {
-        List<CharacteristicDto> list = new ArrayList<>();
-        list.add(CharacteristicDtoTest.withDefaultResponse());
-        Mockito.when(pipeline.send(any(GetListCharacteristicQuery.class))).thenReturn(list);
-        List<CharacteristicDto> response = controller.getListAll();
-        Assertions.assertEquals(response, list);
-    }
+	@Test
+	void create() throws ParseException {
+		CharacteristicDto model = CharacteristicDtoTest.withDefault();
+		CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
+		Mockito.when(pipeline.send(any(CreateCharacteristicCommand.class))).thenReturn(expect);
+		CharacteristicDto response = controller.createCharacteristic(model);
+		Assertions.assertEquals(response, expect);
+	}
+
+	@Test
+	void getAll() throws ParseException {
+		List<CharacteristicDto> list = new ArrayList<>();
+		list.add(CharacteristicDtoTest.withDefaultResponse());
+		Mockito.when(pipeline.send(any(GetListCharacteristicQuery.class))).thenReturn(list);
+		List<CharacteristicDto> response = controller.getListAll();
+		Assertions.assertEquals(response, list);
+	}
+
 }

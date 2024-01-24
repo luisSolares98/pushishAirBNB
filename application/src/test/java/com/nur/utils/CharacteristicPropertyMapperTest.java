@@ -14,27 +14,30 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockitoExtension.class)
 class CharacteristicPropertyMapperTest {
 
-    @Mock
-    CharacteristicPropertyMapper mapper;
+	@Mock
+	CharacteristicPropertyMapper mapper;
 
-    @BeforeEach
-    void setUp() {
-        mapper = new CharacteristicPropertyMapper();
-    }
-    @Test
-    void from() throws ParseException, BussinessRuleValidationException {
-        PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
-        PropertyCharacteristicDto response = CharacteristicPropertyMapper.from(CharacteristicPropertyFixture.whitDefault());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@BeforeEach
+	void setUp() {
+		mapper = new CharacteristicPropertyMapper();
+	}
 
-    @Test
-    void testFromNull() throws ParseException {
-        PropertyCharacteristicDto response = CharacteristicPropertyMapper.from((CharacteristicProperty) null);
-        assertEquals(PropertyCharacteristicDto.builder().build().toString(), response.toString());
-    }
+	@Test
+	void from() throws ParseException, BussinessRuleValidationException {
+		PropertyCharacteristicDto expect = PropertyCharacteristicDtoTest.withDefaultResponse();
+		PropertyCharacteristicDto response = CharacteristicPropertyMapper
+				.from(CharacteristicPropertyFixture.whitDefault());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void testFromNull() throws ParseException {
+		PropertyCharacteristicDto response = CharacteristicPropertyMapper.from((CharacteristicProperty) null);
+		assertEquals(PropertyCharacteristicDto.builder().build().toString(), response.toString());
+	}
 
 }

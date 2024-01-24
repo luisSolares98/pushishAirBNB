@@ -12,24 +12,26 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class PersonNameValueTest {
 
-    @Mock
-    PersonNameValue ciRule;
+	@Mock
+	PersonNameValue ciRule;
 
-    @BeforeEach
-    void setUp() {
-    }
+	@BeforeEach
+	void setUp() {
+	}
 
-    @Test
-    void testOk() throws BussinessRuleValidationException {
-        String entero = new String("pepe pepito");
-        ciRule = new PersonNameValue(entero);
-        assertEquals(entero, ciRule.getName());
-    }
+	@Test
+	void testOk() throws BussinessRuleValidationException {
+		String entero = new String("pepe pepito");
+		ciRule = new PersonNameValue(entero);
+		assertEquals(entero, ciRule.getName());
+	}
 
-    @Test
-    void testFail() throws BussinessRuleValidationException {
-        BussinessRuleValidationException exception = assertThrows(BussinessRuleValidationException.class,
-                () -> new PersonNameValue("pepe pepito asdasaa asdasdsacasdasdas asdasdas asdasdas asdasdsa asdasdasdasdasdasdasdasd asdasdasdasd asdasdsa"));
-        assertEquals("The name lenght can not be greater than 50" , exception.getMessage());
-    }
+	@Test
+	void testFail() throws BussinessRuleValidationException {
+		BussinessRuleValidationException exception = assertThrows(BussinessRuleValidationException.class,
+				() -> new PersonNameValue(
+						"pepe pepito asdasaa asdasdsacasdasdas asdasdas asdasdas asdasdsa asdasdasdasdasdasdasdasd asdasdasdasd asdasdsa"));
+		assertEquals("The name lenght can not be greater than 50", exception.getMessage());
+	}
+
 }

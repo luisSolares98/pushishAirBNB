@@ -25,38 +25,40 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetCharacteristicByPropertyHandlerTest {
-    @Mock
-    CharacteristicPropertyRepository propertyRepository;
 
-    @Mock
-    CharacteristicRepository tipo;
+	@Mock
+	CharacteristicPropertyRepository propertyRepository;
 
-    @InjectMocks
-    GetCharacteristicByPropertyHandler service;
+	@Mock
+	CharacteristicRepository tipo;
 
+	@InjectMocks
+	GetCharacteristicByPropertyHandler service;
 
-    @BeforeEach
-    void setUp() {
-        service = new GetCharacteristicByPropertyHandler(propertyRepository, tipo);
-    }
+	@BeforeEach
+	void setUp() {
+		service = new GetCharacteristicByPropertyHandler(propertyRepository, tipo);
+	}
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        doReturn(CharacteristicPropertyFixture.whitDefaultList()).when(propertyRepository).getAllByProperty();
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		doReturn(CharacteristicPropertyFixture.whitDefaultList()).when(propertyRepository).getAllByProperty();
 
-        when(tipo.getAll()).thenReturn(CharacteristicFixture.whitDefaultList());
-        List<PropertyCharacteristicDto> expect = PropertyCharacteristicDtoTest.whitDefaultList();
-        GetCharacteristicByPropertyQuery command = new GetCharacteristicByPropertyQuery(CharacteristicPropertyFixture.whitDefault().getPropertyId().toString());
-        List<PropertyCharacteristicDto> respuesta = service.handle(command);
+		when(tipo.getAll()).thenReturn(CharacteristicFixture.whitDefaultList());
+		List<PropertyCharacteristicDto> expect = PropertyCharacteristicDtoTest.whitDefaultList();
+		GetCharacteristicByPropertyQuery command = new GetCharacteristicByPropertyQuery(
+				CharacteristicPropertyFixture.whitDefault().getPropertyId().toString());
+		List<PropertyCharacteristicDto> respuesta = service.handle(command);
 
-        assertEquals(expect.get(0).getId(), respuesta.get(0).getId());
-    }
+		assertEquals(expect.get(0).getId(), respuesta.get(0).getId());
+	}
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        when(propertyRepository.getAllByProperty()).thenThrow(new RuntimeException("Simulated repository exception"));
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		when(propertyRepository.getAllByProperty()).thenThrow(new RuntimeException("Simulated repository exception"));
 
-        GetCharacteristicByPropertyQuery command = new GetCharacteristicByPropertyQuery(null);
-        assertThrows(InvalidDataException.class, () -> service.handle(null));
-    }
+		GetCharacteristicByPropertyQuery command = new GetCharacteristicByPropertyQuery(null);
+		assertThrows(InvalidDataException.class, () -> service.handle(null));
+	}
+
 }

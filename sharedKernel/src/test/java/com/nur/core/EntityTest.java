@@ -54,7 +54,7 @@ class EntityTest {
 			public UUID getId() {
 				return super.getId();
 			}
-		} ;
+		};
 		entity.addDomainEvents(event);
 		Assert.assertFalse(entity.getDomainEvents().isEmpty());
 		Assert.assertTrue(entity.getDomainEvents().contains(event));

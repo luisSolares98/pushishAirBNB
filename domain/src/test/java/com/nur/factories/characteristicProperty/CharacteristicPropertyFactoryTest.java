@@ -13,23 +13,26 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(MockitoExtension.class)
 class CharacteristicPropertyFactoryTest {
-    @Mock
-    CharacteristicPropertyFactory factory;
 
-    @Spy
-    ICharacteristicPropertyFactory inFactory;
+	@Mock
+	CharacteristicPropertyFactory factory;
 
-    @BeforeEach
-    void setUp() {
-        this.factory = new CharacteristicPropertyFactory();
-    }
+	@Spy
+	ICharacteristicPropertyFactory inFactory;
 
-    @Test
-    void create() throws BussinessRuleValidationException, ParseException {
-        CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
-        CharacteristicProperty response = factory.create(expect.getCharacteristicId(), expect.getPropertyId());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@BeforeEach
+	void setUp() {
+		this.factory = new CharacteristicPropertyFactory();
+	}
+
+	@Test
+	void create() throws BussinessRuleValidationException, ParseException {
+		CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
+		CharacteristicProperty response = factory.create(expect.getCharacteristicId(), expect.getPropertyId());
+		assertEquals(expect.toString(), response.toString());
+	}
+
 }

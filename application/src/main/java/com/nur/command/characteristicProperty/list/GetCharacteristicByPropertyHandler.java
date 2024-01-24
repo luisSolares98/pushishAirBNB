@@ -24,8 +24,10 @@ public class GetCharacteristicByPropertyHandler
 	private final CharacteristicPropertyRepository repository;
 
 	private CharacteristicRepository tipo;
+
 	@Autowired
-	public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository, CharacteristicRepository characteristicRepository) {
+	public GetCharacteristicByPropertyHandler(CharacteristicPropertyRepository repository,
+			CharacteristicRepository characteristicRepository) {
 		this.repository = repository;
 		this.tipo = characteristicRepository;
 	}

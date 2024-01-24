@@ -16,47 +16,48 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class PropertyUtilsTest {
-    @Mock
-    PropertyUtils utils;
 
-    @BeforeEach
-    void setUp() {
-        utils = new PropertyUtils();
-    }
+	@Mock
+	PropertyUtils utils;
 
-    @Test
-    void JpaModelListVoid() throws BussinessRuleValidationException, ParseException {
-        List<PropertyJpaModel> expect = PropertyUtils.propiedadToJpaEntities(null);
-        assertNotNull(expect);
-    }
+	@BeforeEach
+	void setUp() {
+		utils = new PropertyUtils();
+	}
 
-    @Test
-    void JpaModelList() throws BussinessRuleValidationException, ParseException {
-        List<PropertyJpaModel> listJpa = PropertyFixture.whitDefaultListJPA();
-        List<Property> list = PropertyFixture.whitDefaultList();
-        List<PropertyJpaModel> expect = PropertyUtils.propiedadToJpaEntities(list);
-        assertEquals(expect.toString(), listJpa.toString());
-    }
+	@Test
+	void JpaModelListVoid() throws BussinessRuleValidationException, ParseException {
+		List<PropertyJpaModel> expect = PropertyUtils.propiedadToJpaEntities(null);
+		assertNotNull(expect);
+	}
 
-    @Test
-    void jpaToCheckInNull() throws BussinessRuleValidationException {
-        InvalidDataException exception = assertThrows(InvalidDataException.class,
-                () -> PropertyUtils.jpaModelToPropiedad(null));
-        assertEquals("jpaModel is null", exception.getMessage());
-    }
+	@Test
+	void JpaModelList() throws BussinessRuleValidationException, ParseException {
+		List<PropertyJpaModel> listJpa = PropertyFixture.whitDefaultListJPA();
+		List<Property> list = PropertyFixture.whitDefaultList();
+		List<PropertyJpaModel> expect = PropertyUtils.propiedadToJpaEntities(list);
+		assertEquals(expect.toString(), listJpa.toString());
+	}
 
-    @Test
-    void jpaToModel() throws BussinessRuleValidationException, ParseException {
-        Property expect = PropertyFixture.whitDefault();
-        Property response = PropertyUtils.jpaModelToPropiedad(PropertyFixture.whitDefaultJPA());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@Test
+	void jpaToCheckInNull() throws BussinessRuleValidationException {
+		InvalidDataException exception = assertThrows(InvalidDataException.class,
+				() -> PropertyUtils.jpaModelToPropiedad(null));
+		assertEquals("jpaModel is null", exception.getMessage());
+	}
 
-    @Test
-    void jpaToEntity() throws BussinessRuleValidationException {
-        InvalidDataException exception = assertThrows(InvalidDataException.class,
-                () -> PropertyUtils.propiedadToJpaEntity(null));
-        assertEquals("entity is null", exception.getMessage());
-    }
+	@Test
+	void jpaToModel() throws BussinessRuleValidationException, ParseException {
+		Property expect = PropertyFixture.whitDefault();
+		Property response = PropertyUtils.jpaModelToPropiedad(PropertyFixture.whitDefaultJPA());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void jpaToEntity() throws BussinessRuleValidationException {
+		InvalidDataException exception = assertThrows(InvalidDataException.class,
+				() -> PropertyUtils.propiedadToJpaEntity(null));
+		assertEquals("entity is null", exception.getMessage());
+	}
 
 }

@@ -2,7 +2,6 @@ package com.nur.rules;
 
 import com.nur.core.BussinessRule;
 
-
 public class CIRule implements BussinessRule {
 
 	private final String ci;

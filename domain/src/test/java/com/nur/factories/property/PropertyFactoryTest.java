@@ -17,24 +17,27 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class PropertyFactoryTest {
 
-    @Mock
-    PropertyFactory factory;
+	@Mock
+	PropertyFactory factory;
 
-    @Spy
-    IPropertyFactory inFactory;
+	@Spy
+	IPropertyFactory inFactory;
 
-    @BeforeEach
-    void setUp() {
-        this.factory = new PropertyFactory();
-    }
+	@BeforeEach
+	void setUp() {
+		this.factory = new PropertyFactory();
+	}
 
-    @Test
-    void create() throws BussinessRuleValidationException, ParseException {
-        Property expect = PropertyFixture.whitDefault();
-        Property response = factory.create(expect.getName(), expect.getAmount(), expect.getDescription(), expect.getState(), expect.getUserId());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@Test
+	void create() throws BussinessRuleValidationException, ParseException {
+		Property expect = PropertyFixture.whitDefault();
+		Property response = factory.create(expect.getName(), expect.getAmount(), expect.getDescription(),
+				expect.getState(), expect.getUserId());
+		assertEquals(expect.toString(), response.toString());
+	}
+
 }

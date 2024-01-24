@@ -41,8 +41,8 @@ public class Property extends Entity {
 		this.state = state;
 	}
 
-
 	public double getAmount() {
 		return amount.getValue();
 	}
+
 }

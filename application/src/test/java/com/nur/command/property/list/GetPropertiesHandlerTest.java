@@ -28,36 +28,37 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetPropertiesHandlerTest {
-    @Mock
-    PropertyRepository propertyRepository;
 
-    @Mock
-    ICharacteristicFactory factory;
+	@Mock
+	PropertyRepository propertyRepository;
 
-    @InjectMocks
-    GetPropertiesHandler service;
+	@Mock
+	ICharacteristicFactory factory;
 
+	@InjectMocks
+	GetPropertiesHandler service;
 
-    @BeforeEach
-    void setUp() {
-        service = new GetPropertiesHandler(propertyRepository);
-    }
+	@BeforeEach
+	void setUp() {
+		service = new GetPropertiesHandler(propertyRepository);
+	}
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        when(propertyRepository.getAll()).thenReturn(PropertyFixture.whitDefaultList());
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		when(propertyRepository.getAll()).thenReturn(PropertyFixture.whitDefaultList());
 
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        GetPropertiesQuery command = new GetPropertiesQuery();
-        List<PropertyDto> respuesta = service.handle(command);
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		GetPropertiesQuery command = new GetPropertiesQuery();
+		List<PropertyDto> respuesta = service.handle(command);
 
-        assertEquals(expect.getId(), respuesta.get(0).getId());
-    }
+		assertEquals(expect.getId(), respuesta.get(0).getId());
+	}
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        when(propertyRepository.getAll()).thenThrow(new RuntimeException("Simulated repository exception"));
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		when(propertyRepository.getAll()).thenThrow(new RuntimeException("Simulated repository exception"));
 
-        assertThrows(InvalidDataException.class, () -> service.handle(null));
-    }
+		assertThrows(InvalidDataException.class, () -> service.handle(null));
+	}
+
 }

@@ -9,8 +9,8 @@ public class PropertyMapper {
 		if (property == null)
 			return PropertyDto.builder().build();
 		return PropertyDto.builder().id(property.getId().toString()).name(property.getName())
-				.amount(property.getAmount()).description(property.getDescription())
-				.state(property.getState()).userId(property.getUserId().toString()).build();
+				.amount(property.getAmount()).description(property.getDescription()).state(property.getState())
+				.userId(property.getUserId().toString()).build();
 	}
 
 }

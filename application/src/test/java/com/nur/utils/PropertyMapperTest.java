@@ -17,23 +17,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class PropertyMapperTest {
-    @Mock
-    PropertyMapper mapper;
 
-    @BeforeEach
-    void setUp() {
-        mapper = new PropertyMapper();
-    }
-    @Test
-    void from() throws ParseException, BussinessRuleValidationException {
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        PropertyDto response = PropertyMapper.from(PropertyFixture.whitDefault());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@Mock
+	PropertyMapper mapper;
 
-    @Test
-    void testFromNull() throws ParseException {
-        PropertyDto response = PropertyMapper.from((Property) null);
-        assertEquals(PropertyDto.builder().build().toString(), response.toString());
-    }
+	@BeforeEach
+	void setUp() {
+		mapper = new PropertyMapper();
+	}
+
+	@Test
+	void from() throws ParseException, BussinessRuleValidationException {
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		PropertyDto response = PropertyMapper.from(PropertyFixture.whitDefault());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void testFromNull() throws ParseException {
+		PropertyDto response = PropertyMapper.from((Property) null);
+		assertEquals(PropertyDto.builder().build().toString(), response.toString());
+	}
+
 }

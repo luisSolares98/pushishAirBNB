@@ -29,36 +29,37 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetListCharacteristicHandlerTest {
-    @Mock
-    CharacteristicRepository propertyRepository;
 
-    @Mock
-    ICharacteristicFactory factory;
+	@Mock
+	CharacteristicRepository propertyRepository;
 
-    @InjectMocks
-    GetListCharacteristicHandler service;
+	@Mock
+	ICharacteristicFactory factory;
 
+	@InjectMocks
+	GetListCharacteristicHandler service;
 
-    @BeforeEach
-    void setUp() {
-        service = new GetListCharacteristicHandler(propertyRepository);
-    }
+	@BeforeEach
+	void setUp() {
+		service = new GetListCharacteristicHandler(propertyRepository);
+	}
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        when(propertyRepository.getAll()).thenReturn(CharacteristicFixture.whitDefaultList());
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		when(propertyRepository.getAll()).thenReturn(CharacteristicFixture.whitDefaultList());
 
-        CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
-        GetListCharacteristicQuery command = new GetListCharacteristicQuery();
-        List<CharacteristicDto> respuesta = service.handle(command);
+		CharacteristicDto expect = CharacteristicDtoTest.withDefaultResponse();
+		GetListCharacteristicQuery command = new GetListCharacteristicQuery();
+		List<CharacteristicDto> respuesta = service.handle(command);
 
-        assertEquals(expect.getId(), respuesta.get(0).getId());
-    }
+		assertEquals(expect.getId(), respuesta.get(0).getId());
+	}
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        when(propertyRepository.getAll()).thenThrow(new RuntimeException("Simulated repository exception"));
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		when(propertyRepository.getAll()).thenThrow(new RuntimeException("Simulated repository exception"));
 
-        assertThrows(InvalidDataException.class, () -> service.handle(null));
-    }
+		assertThrows(InvalidDataException.class, () -> service.handle(null));
+	}
+
 }

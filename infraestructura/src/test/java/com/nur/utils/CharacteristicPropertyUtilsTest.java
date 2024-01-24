@@ -18,51 +18,57 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CharacteristicPropertyUtilsTest {
-    @Mock
-    CharacteristicPropertyUtils utils;
 
-    @BeforeEach
-    void setUp() {
-        utils = new CharacteristicPropertyUtils();
-    }
+	@Mock
+	CharacteristicPropertyUtils utils;
 
-    @Test
-    void JpaModelListVoid() throws BussinessRuleValidationException, ParseException {
-        List<CharacteristicPropertyJpaModel> expect = CharacteristicPropertyUtils.ToJpaEntities(null);
-        assertNotNull(expect);
-    }
+	@BeforeEach
+	void setUp() {
+		utils = new CharacteristicPropertyUtils();
+	}
 
-    @Test
-    void JpaModelList() throws BussinessRuleValidationException, ParseException {
-        List<CharacteristicPropertyJpaModel> listJpa = CharacteristicPropertyFixture.whitDefaultListJPA();
-        List<CharacteristicProperty> list = CharacteristicPropertyFixture.whitDefaultList();
-        List<CharacteristicPropertyJpaModel> expect = CharacteristicPropertyUtils.ToJpaEntities(list);
-        assertEquals(expect.toString(), listJpa.toString());
-    }
+	@Test
+	void JpaModelListVoid() throws BussinessRuleValidationException, ParseException {
+		List<CharacteristicPropertyJpaModel> expect = CharacteristicPropertyUtils.ToJpaEntities(null);
+		assertNotNull(expect);
+	}
 
-    @Test
-    void jpaToCheckInNull() throws BussinessRuleValidationException {
-        InvalidDataException exception = assertThrows(InvalidDataException.class,
-                () -> CharacteristicPropertyUtils.jpaModelToCharacteristicProperty(null));
-        assertEquals("jpaModel is null", exception.getMessage());
-    }
+	@Test
+	void JpaModelList() throws BussinessRuleValidationException, ParseException {
+		List<CharacteristicPropertyJpaModel> listJpa = CharacteristicPropertyFixture.whitDefaultListJPA();
+		List<CharacteristicProperty> list = CharacteristicPropertyFixture.whitDefaultList();
+		List<CharacteristicPropertyJpaModel> expect = CharacteristicPropertyUtils.ToJpaEntities(list);
+		assertEquals(expect.toString(), listJpa.toString());
+	}
 
-    @Test
-    void jpaTModel() throws BussinessRuleValidationException, ParseException {
-        CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
-        CharacteristicProperty response = CharacteristicPropertyUtils.jpaModelToCharacteristicProperty(CharacteristicPropertyFixture.whitDefaultJPA());
-        assertEquals(expect.toString(), response.toString());
-    }
-    @Test
-    void jpaTModelNull() throws BussinessRuleValidationException, ParseException {
-        CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
-        CharacteristicProperty response = CharacteristicPropertyUtils.jpaModelToCharacteristicProperty(CharacteristicPropertyFixture.whitDefaultJPA());
-        assertEquals(expect.toString(), response.toString());
-    }
-    @Test
-    void jpaToEntity() throws BussinessRuleValidationException {
-        InvalidDataException exception = assertThrows(InvalidDataException.class,
-                () -> CharacteristicPropertyUtils.ToJpaEntity(null));
-        assertEquals("entity is null", exception.getMessage());
-    }
+	@Test
+	void jpaToCheckInNull() throws BussinessRuleValidationException {
+		InvalidDataException exception = assertThrows(InvalidDataException.class,
+				() -> CharacteristicPropertyUtils.jpaModelToCharacteristicProperty(null));
+		assertEquals("jpaModel is null", exception.getMessage());
+	}
+
+	@Test
+	void jpaTModel() throws BussinessRuleValidationException, ParseException {
+		CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
+		CharacteristicProperty response = CharacteristicPropertyUtils
+				.jpaModelToCharacteristicProperty(CharacteristicPropertyFixture.whitDefaultJPA());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void jpaTModelNull() throws BussinessRuleValidationException, ParseException {
+		CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
+		CharacteristicProperty response = CharacteristicPropertyUtils
+				.jpaModelToCharacteristicProperty(CharacteristicPropertyFixture.whitDefaultJPA());
+		assertEquals(expect.toString(), response.toString());
+	}
+
+	@Test
+	void jpaToEntity() throws BussinessRuleValidationException {
+		InvalidDataException exception = assertThrows(InvalidDataException.class,
+				() -> CharacteristicPropertyUtils.ToJpaEntity(null));
+		assertEquals("entity is null", exception.getMessage());
+	}
+
 }

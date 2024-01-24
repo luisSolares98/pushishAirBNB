@@ -15,7 +15,7 @@ import java.util.UUID;
 class DomainEventTest {
 
 	@Mock
-    DomainEvent event;
+	DomainEvent event;
 
 	LocalDateTime fecha;
 

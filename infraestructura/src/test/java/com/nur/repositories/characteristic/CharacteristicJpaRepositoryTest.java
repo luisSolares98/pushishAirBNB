@@ -24,35 +24,35 @@ import static org.mockito.ArgumentMatchers.any;
 @ExtendWith(MockitoExtension.class)
 class CharacteristicJpaRepositoryTest {
 
-    @InjectMocks
-    CharacteristicJpaRepository repository;
+	@InjectMocks
+	CharacteristicJpaRepository repository;
 
-    @Spy
-    CharacteristicCrudRepository crudRepository;
+	@Spy
+	CharacteristicCrudRepository crudRepository;
 
+	@Test
+	void update() throws BussinessRuleValidationException, ParseException {
+		Characteristic expect = CharacteristicFixture.whitDefault();
+		UUID sampleId = UUID.randomUUID();
 
-    @Test
-    void update() throws BussinessRuleValidationException, ParseException {
-        Characteristic expect = CharacteristicFixture.whitDefault();
-        UUID sampleId = UUID.randomUUID();
+		Mockito.when(crudRepository.save(any(CharacteristicJpaModel.class))).thenAnswer(invocation -> {
+			CharacteristicJpaModel savedModel = invocation.getArgument(0);
+			savedModel.setId(sampleId); // Assign a UUID or an appropriate ID here
+			return savedModel;
+		});
+		UUID respuesta = repository.update(expect);
+		assertNotNull(respuesta);
+		assertEquals(sampleId, respuesta);
+	}
 
-        Mockito.when(crudRepository.save(any(CharacteristicJpaModel.class))).thenAnswer(invocation -> {
-            CharacteristicJpaModel savedModel = invocation.getArgument(0);
-            savedModel.setId(sampleId); // Assign a UUID or an appropriate ID here
-            return savedModel;
-        });
-        UUID respuesta = repository.update(expect);
-        assertNotNull(respuesta);
-        assertEquals(sampleId, respuesta);
-    }
+	@Test
+	void getAll() throws BussinessRuleValidationException, ParseException {
+		List<Characteristic> expect = CharacteristicFixture.whitDefaultList();
+		Mockito.when(crudRepository.findAll()).thenReturn(CharacteristicFixture.whitDefaultListJPA());
 
-    @Test
-    void getAll() throws BussinessRuleValidationException, ParseException {
-        List<Characteristic> expect = CharacteristicFixture.whitDefaultList();
-        Mockito.when(crudRepository.findAll()).thenReturn(CharacteristicFixture.whitDefaultListJPA());
+		List<Characteristic> respuesta = repository.getAll();
+		assertNotNull(respuesta);
+		assertEquals(expect.toString(), respuesta.toString());
+	}
 
-        List<Characteristic> respuesta = repository.getAll();
-        assertNotNull(respuesta);
-        assertEquals(expect.toString(), respuesta.toString());
-    }
 }

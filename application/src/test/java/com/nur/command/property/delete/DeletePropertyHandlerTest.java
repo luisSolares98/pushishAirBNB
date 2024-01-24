@@ -31,37 +31,38 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DeletePropertyHandlerTest {
-    @Mock
-    PropertyRepository iProperty;
 
+	@Mock
+	PropertyRepository iProperty;
 
-    @InjectMocks
-    DeletePropertyHandler service;
+	@InjectMocks
+	DeletePropertyHandler service;
 
-    @Mock
-    RabbitTemplate template;
+	@Mock
+	RabbitTemplate template;
 
-    @BeforeEach
-    void setUp() {
-        service = new DeletePropertyHandler(iProperty);
-        MockitoAnnotations.openMocks(this);
-    }
+	@BeforeEach
+	void setUp() {
+		service = new DeletePropertyHandler(iProperty);
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
-    void handle() throws ParseException, BussinessRuleValidationException {
-        doReturn(PropertyFixture.whitDefault()).when(iProperty).findPropertyById(any());
+	@Test
+	void handle() throws ParseException, BussinessRuleValidationException {
+		doReturn(PropertyFixture.whitDefault()).when(iProperty).findPropertyById(any());
 
-        PropertyDto expect = PropertyDtoTest.withDefaultResponse();
-        DeletePropertyQuery command = new DeletePropertyQuery(PropertyDtoTest.withDefaultResponse().getId());
-        Mockito.doNothing().when(template).convertAndSend(anyString(), (Object) any());
+		PropertyDto expect = PropertyDtoTest.withDefaultResponse();
+		DeletePropertyQuery command = new DeletePropertyQuery(PropertyDtoTest.withDefaultResponse().getId());
+		Mockito.doNothing().when(template).convertAndSend(anyString(), (Object) any());
 
-        UUID respuesta = service.handle(command);
-        assertEquals(expect.getId(), respuesta.toString());
-    }
+		UUID respuesta = service.handle(command);
+		assertEquals(expect.getId(), respuesta.toString());
+	}
 
-    @Test
-    void handleError() throws ParseException, BussinessRuleValidationException {
-        DeletePropertyQuery command = new DeletePropertyQuery(null);
-        assertThrows(InvalidDataException.class, () -> service.handle(command));
-    }
+	@Test
+	void handleError() throws ParseException, BussinessRuleValidationException {
+		DeletePropertyQuery command = new DeletePropertyQuery(null);
+		assertThrows(InvalidDataException.class, () -> service.handle(command));
+	}
+
 }

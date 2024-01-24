@@ -12,24 +12,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class PrecioValueTest {
 
-    @Mock
-    PrecioValue precioValue;
+	@Mock
+	PrecioValue precioValue;
 
-    @BeforeEach
-    void setUp() {
-    }
+	@BeforeEach
+	void setUp() {
+	}
 
-    @Test
-    void testOk() throws BussinessRuleValidationException {
-        Double precio = 1.1;
-        precioValue = new PrecioValue(precio);
-        assertEquals(precio, precioValue.getValue());
-    }
+	@Test
+	void testOk() throws BussinessRuleValidationException {
+		Double precio = 1.1;
+		precioValue = new PrecioValue(precio);
+		assertEquals(precio, precioValue.getValue());
+	}
 
-    @Test
-    void testFail() throws BussinessRuleValidationException {
-        BussinessRuleValidationException exception = assertThrows(BussinessRuleValidationException.class,
-                () -> new PrecioValue(0));
-        assertEquals("Price value cannot be negative or zero", exception.getMessage());
-    }
+	@Test
+	void testFail() throws BussinessRuleValidationException {
+		BussinessRuleValidationException exception = assertThrows(BussinessRuleValidationException.class,
+				() -> new PrecioValue(0));
+		assertEquals("Price value cannot be negative or zero", exception.getMessage());
+	}
+
 }

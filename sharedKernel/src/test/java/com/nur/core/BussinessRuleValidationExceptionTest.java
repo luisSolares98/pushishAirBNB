@@ -22,7 +22,7 @@ class BussinessRuleValidationExceptionTest {
 	BussinessRuleValidationException exception;
 
 	@Mock
-    ValueObject valueObject;
+	ValueObject valueObject;
 
 	@BeforeEach
 	void setUp() {

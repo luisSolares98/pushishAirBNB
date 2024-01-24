@@ -25,4 +25,5 @@ public abstract class Entity {
 	public void setKey(UUID key) {
 		this.id = key;
 	}
+
 }

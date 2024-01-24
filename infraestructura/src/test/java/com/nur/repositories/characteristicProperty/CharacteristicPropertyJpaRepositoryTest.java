@@ -21,35 +21,35 @@ import static org.mockito.ArgumentMatchers.any;
 @ExtendWith(MockitoExtension.class)
 class CharacteristicPropertyJpaRepositoryTest {
 
-    @InjectMocks
-    CharacteristicPropertyJpaRepository repository;
+	@InjectMocks
+	CharacteristicPropertyJpaRepository repository;
 
-    @Spy
-    CharacteristicPropertyCrudRepository crudRepository;
+	@Spy
+	CharacteristicPropertyCrudRepository crudRepository;
 
+	@Test
+	void update() throws BussinessRuleValidationException, ParseException {
+		CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
+		UUID sampleId = UUID.randomUUID();
 
-    @Test
-    void update() throws BussinessRuleValidationException, ParseException {
-        CharacteristicProperty expect = CharacteristicPropertyFixture.whitDefault();
-        UUID sampleId = UUID.randomUUID();
+		Mockito.when(crudRepository.save(any(CharacteristicPropertyJpaModel.class))).thenAnswer(invocation -> {
+			CharacteristicPropertyJpaModel savedModel = invocation.getArgument(0);
+			savedModel.setId(sampleId); // Assign a UUID or an appropriate ID here
+			return savedModel;
+		});
+		UUID respuesta = repository.update(expect);
+		assertNotNull(respuesta);
+		assertEquals(sampleId, respuesta);
+	}
 
-        Mockito.when(crudRepository.save(any(CharacteristicPropertyJpaModel.class))).thenAnswer(invocation -> {
-            CharacteristicPropertyJpaModel savedModel = invocation.getArgument(0);
-            savedModel.setId(sampleId); // Assign a UUID or an appropriate ID here
-            return savedModel;
-        });
-        UUID respuesta = repository.update(expect);
-        assertNotNull(respuesta);
-        assertEquals(sampleId, respuesta);
-    }
+	@Test
+	void getAll() throws BussinessRuleValidationException, ParseException {
+		List<CharacteristicProperty> expect = CharacteristicPropertyFixture.whitDefaultList();
+		Mockito.when(crudRepository.findAll()).thenReturn(CharacteristicPropertyFixture.whitDefaultListJPA());
 
-    @Test
-    void getAll() throws BussinessRuleValidationException, ParseException {
-        List<CharacteristicProperty> expect = CharacteristicPropertyFixture.whitDefaultList();
-        Mockito.when(crudRepository.findAll()).thenReturn(CharacteristicPropertyFixture.whitDefaultListJPA());
+		List<CharacteristicProperty> respuesta = repository.getAllByProperty();
+		assertNotNull(respuesta);
+		assertEquals(expect.toString(), respuesta.toString());
+	}
 
-        List<CharacteristicProperty> respuesta = repository.getAllByProperty();
-        assertNotNull(respuesta);
-        assertEquals(expect.toString(), respuesta.toString());
-    }
 }

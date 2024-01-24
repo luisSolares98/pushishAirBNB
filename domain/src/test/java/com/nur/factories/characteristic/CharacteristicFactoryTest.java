@@ -16,24 +16,26 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class CharacteristicFactoryTest {
 
-    @Mock
-    CharacteristicFactory factory;
+	@Mock
+	CharacteristicFactory factory;
 
-    @Spy
-    ICharacteristicFactory inFactory;
+	@Spy
+	ICharacteristicFactory inFactory;
 
-    @BeforeEach
-    void setUp() {
-        this.factory = new CharacteristicFactory();
-    }
+	@BeforeEach
+	void setUp() {
+		this.factory = new CharacteristicFactory();
+	}
 
-    @Test
-    void create() throws BussinessRuleValidationException, ParseException {
-        Characteristic expect = CharacteristicFixture.whitDefault();
-        Characteristic response = factory.create(expect.getName());
-        assertEquals(expect.toString(), response.toString());
-    }
+	@Test
+	void create() throws BussinessRuleValidationException, ParseException {
+		Characteristic expect = CharacteristicFixture.whitDefault();
+		Characteristic response = factory.create(expect.getName());
+		assertEquals(expect.toString(), response.toString());
+	}
+
 }

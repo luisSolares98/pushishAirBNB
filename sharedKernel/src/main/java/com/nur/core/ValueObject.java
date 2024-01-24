@@ -1,4 +1,5 @@
 package com.nur.core;
+
 import java.util.Objects;
 
 public abstract class ValueObject {
