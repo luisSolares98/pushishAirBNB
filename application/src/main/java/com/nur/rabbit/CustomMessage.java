@@ -3,7 +3,7 @@ package com.nur.rabbit;
 import java.util.UUID;
 
 import lombok.*;
-
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,7 +1,7 @@
 package com.nur.rabbit;
 
 import lombok.*;
-
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
