@@ -24,6 +24,9 @@ public class MessageListener {
 			if (Objects.isNull(message))
 				return;
 			Property property = propertyRepository.findPropertyById(message.getData().getId());
+			property.setState("busy");
+			propertyRepository.update(property);
+
 			Pattern pattern = Pattern.builder().cmd(Config.EXCHANGE).build();
 			CustomMessage customMessage = CustomMessage.builder().id(property.getUserId())
 					.message("Property reserve success").build();

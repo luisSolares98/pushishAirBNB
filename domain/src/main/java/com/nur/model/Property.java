@@ -45,4 +45,8 @@ public class Property extends Entity {
 		return amount.getValue();
 	}
 
+	public void setState(String state) {
+		this.state = state;
+	}
+
 }
